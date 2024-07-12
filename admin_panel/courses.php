@@ -14,7 +14,6 @@ if (!isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="admin.css">
-
 </head>
 <body>
 
@@ -27,8 +26,8 @@ if (!isset($_SESSION['username'])) {
 </div>
 
 <div class="main-content">
-    <h2>Dashboard</h2>
-    <p>This is the dashboard content.</p>
+    <h2>Courses</h2>
+    <p>This is the Courses content.</p>
 </div>
 
 <script>
