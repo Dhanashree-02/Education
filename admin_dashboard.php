@@ -64,7 +64,7 @@ if (!isset($_SESSION['username'])) {
 <body>
 
 <div class="sidebar">
-    <h2>Admin Dashboard</h2>
+<a href="admin_dashboard.php"><h2>Admin Dashboard</h2></a>
     <a href="admin_panel/dashboard.php">Dashboard</a>
     <a href="admin_panel/profile.php">Profile</a>
     <a href="admin_panel/settings.php">Settings</a>
