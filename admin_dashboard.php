@@ -23,7 +23,7 @@ if (!isset($_SESSION['username'])) {
             margin: 0;
         }
         .sidebar {
-            background-color: #333;
+            background-color: #3f4d67;
             color: #fff;
             padding: 20px;
             width: 200px;
@@ -35,10 +35,10 @@ if (!isset($_SESSION['username'])) {
             text-decoration: none;
             padding: 10px 0;
             margin: 5px 0;
-            border-bottom: 1px solid #444;
+            border-bottom: 1px solid #a9b7d0;
         }
         .sidebar a:hover {
-            background-color: #444;
+            color: #39afd3;
         }
         .main-content {
             flex-grow: 1;
