@@ -298,7 +298,7 @@ var getInlineOption = (function (el, key, fallback) {
 
 /**
  * Calculate offset
- * basing on element's settings like:
+ * basing on element's Contact like:
  * - anchor
  * - offset
  *
@@ -531,8 +531,8 @@ var isDisabled = function isDisabled(optionDisable) {
  * - Attach function that handle scroll and everything connected to it
  *   to window scroll event and fire once document is ready to set initial state
  */
-var init = function init(settings) {
-  options = _extends(options, settings);
+var init = function init(Contact) {
+  options = _extends(options, Contact);
 
   // Create initial array with elements -> to be fullfilled later with prepare()
   $aosElements = elements();
@@ -563,7 +563,7 @@ var init = function init(settings) {
   }
 
   /**
-   * Set global settings on body, based on options
+   * Set global Contact on body, based on options
    * so CSS can use it
    */
   document.querySelector('body').setAttribute('data-aos-easing', options.easing);

@@ -35,3 +35,6 @@
 .form-submit:hover {
     background-color: #45a049;
 }
+.main-content h2, h3{
+    text-align: center;
+}

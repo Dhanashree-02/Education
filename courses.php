@@ -79,7 +79,7 @@ $conn->close();
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="admin.html">Admin</a>
+      <a class="btn-getstarted" href="courses.php">Get Started</a>
 
     </div>
   </header>
@@ -116,10 +116,10 @@ $conn->close();
           <?php if (!empty($courses)): ?>
               <?php foreach ($courses as $course): ?>
                   <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
-                      <div class="card h-100" style="border-color: black; border-radius: 10px; transition: transform 0.3s;">
+                      <div class="card h-100" style="border-width: 1px; border-color: black; border-radius: 10px; transition: transform 0.3s;">
                           <div class="card-body text-center">
                               <i class="bi bi-mortarboard" style="color: #ffbb2c; font-size: 2em;"></i>
-                              <h3 class="card-title mt-3"><?php echo htmlspecialchars($course['course_title']); ?></h3>
+                              <h3 class="card-title mt-2"><?php echo htmlspecialchars($course['course_title']); ?></h3>
                               <p class="card-text"><?php echo htmlspecialchars($course['course_description']); ?></p>
                           </div>
                       </div>

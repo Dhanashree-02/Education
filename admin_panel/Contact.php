@@ -22,13 +22,13 @@ if (!isset($_SESSION['username'])) {
 <a href="../admin_dashboard.php"><h2>Admin Dashboard</h2></a>
     <a href="dashboard.php">Dashboard</a>
     <a href="courses.php">Courses</a>
-    <a href="settings.php">Settings</a>
+    <a href="Contact.php">Contact</a>
     <a href="#" onclick="confirmLogout()">Logout</a>
 </div>
 
 <div class="main-content">
-    <h2>Settings</h2>
-    <p>This is the Settings content.</p>
+    <h2>Contact</h2>
+    <p>This is the Contact content.</p>
 </div>
 
 <script>

@@ -1,6 +1,6 @@
-<?php if($_settings->chk_flashdata('success')): ?>
+<?php if($_Contact->chk_flashdata('success')): ?>
 <script>
-	alert_toast("<?php echo $_settings->flashdata('success') ?>",'success')
+	alert_toast("<?php echo $_Contact->flashdata('success') ?>",'success')
 </script>
 <?php endif;?>
 
@@ -32,15 +32,15 @@
 				<div id="msg" class="form-group"></div>
 				<div class="form-group">
 					<label for="name" class="control-label">System Name</label>
-					<input type="text" class="form-control form-control-sm" name="name" id="name" value="<?php echo $_settings->info('name') ?>">
+					<input type="text" class="form-control form-control-sm" name="name" id="name" value="<?php echo $_Contact->info('name') ?>">
 				</div>
 				<div class="form-group">
 					<label for="short_name" class="control-label">System Short Name</label>
-					<input type="text" class="form-control form-control-sm" name="short_name" id="short_name" value="<?php echo  $_settings->info('short_name') ?>">
+					<input type="text" class="form-control form-control-sm" name="short_name" id="short_name" value="<?php echo  $_Contact->info('short_name') ?>">
 				</div>
 			<div class="form-group">
 				<label for="" class="control-label">Welcome Content</label>
-	             <textarea name="welcome_message" id="" cols="30" rows="5" class="form-control"><?php echo  stripslashes($_settings->info('welcome_message')) ?></textarea>
+	             <textarea name="welcome_message" id="" cols="30" rows="5" class="form-control"><?php echo  stripslashes($_Contact->info('welcome_message')) ?></textarea>
 			</div>
 			<div class="form-group">
 				<label for="" class="control-label">System Logo</label>
@@ -50,7 +50,7 @@
 	            </div>
 			</div>
 			<div class="form-group d-flex justify-content-center">
-				<img src="<?php echo validate_image($_settings->info('logo')) ?>" alt="" id="cimg" class="img-fluid img-thumbnail">
+				<img src="<?php echo validate_image($_Contact->info('logo')) ?>" alt="" id="cimg" class="img-fluid img-thumbnail">
 			</div>
 			<div class="form-group">
 				<label for="" class="control-label">Website Banner Image</label>
@@ -60,7 +60,7 @@
 	            </div>
 			</div>
 			<div class="form-group d-flex justify-content-center">
-				<img src="<?php echo validate_image($_settings->info('banner')) ?>" alt="" id="cimg2" class="img-fluid img-thumbnail">
+				<img src="<?php echo validate_image($_Contact->info('banner')) ?>" alt="" id="cimg2" class="img-fluid img-thumbnail">
 			</div>
 
 			</form>

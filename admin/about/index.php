@@ -1,6 +1,6 @@
-<?php if($_settings->chk_flashdata('success')): ?>
+<?php if($_Contact->chk_flashdata('success')): ?>
 <script>
-	alert_toast("<?php echo $_settings->flashdata('success') ?>",'success')
+	alert_toast("<?php echo $_Contact->flashdata('success') ?>",'success')
 </script>
 <?php endif;?>
 <div class="col-lg-12">

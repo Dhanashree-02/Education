@@ -67,7 +67,7 @@ if (!isset($_SESSION['username'])) {
 <a href="admin_dashboard.php"><h2>Admin Dashboard</h2></a>
     <a href="admin_panel/dashboard.php">Dashboard</a>
     <a href="admin_panel/courses.php">Courses</a>
-    <a href="admin_panel/settings.php">Settings</a>
+    <a href="admin_panel/Contact.php">Contact</a>
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 
 </div>

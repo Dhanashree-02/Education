@@ -834,10 +834,10 @@
             this.lastDirection = 'x';
             this.setTranslate(this.dragContainer, this.currentX, 0);
             var doChange = this.shouldChange();
-            if (!this.instance.settings.dragAutoSnap && doChange) {
+            if (!this.instance.Contact.dragAutoSnap && doChange) {
               this.doSlideChange = doChange;
             }
-            if (this.instance.settings.dragAutoSnap && doChange) {
+            if (this.instance.Contact.dragAutoSnap && doChange) {
               this.instance.preventOutsideClick = true;
               this.toleranceReached = true;
               this.active = false;
@@ -853,10 +853,10 @@
             this.lastDirection = 'y';
             this.setTranslate(this.dragContainer, 0, this.currentY);
             var doClose = this.shouldClose();
-            if (!this.instance.settings.dragAutoSnap && doClose) {
+            if (!this.instance.Contact.dragAutoSnap && doClose) {
               this.doSlideClose = true;
             }
-            if (this.instance.settings.dragAutoSnap && doClose) {
+            if (this.instance.Contact.dragAutoSnap && doClose) {
               this.instance.close();
             }
             return;
@@ -944,12 +944,12 @@
     addClass(slideContainer, 'gvideo-container');
     slideMedia.insertBefore(createHTML('<div class="gvideo-wrapper"></div>'), slideMedia.firstChild);
     var videoWrapper = slide.querySelector('.gvideo-wrapper');
-    injectAssets(this.settings.plyr.css, 'Plyr');
+    injectAssets(this.Contact.plyr.css, 'Plyr');
     var url = data.href;
     var provider = data === null || data === void 0 ? void 0 : data.videoProvider;
     var customPlaceholder = false;
     slideMedia.style.maxWidth = data.width;
-    injectAssets(this.settings.plyr.js, 'Plyr', function () {
+    injectAssets(this.Contact.plyr.js, 'Plyr', function () {
       if (!provider && url.match(/vimeo\.com\/([0-9]*)/)) {
         provider = 'vimeo';
       }
@@ -974,7 +974,7 @@
       videoWrapper.appendChild(placeholder);
       videoWrapper.setAttribute('data-id', videoID);
       videoWrapper.setAttribute('data-index', index);
-      var playerConfig = has(_this.settings.plyr, 'config') ? _this.settings.plyr.config : {};
+      var playerConfig = has(_this.Contact.plyr, 'config') ? _this.Contact.plyr.config : {};
       var player = new Plyr('#' + videoID, playerConfig);
       player.on('ready', function (event) {
         videoPlayers[videoID] = event.detail.plyr;
@@ -1122,10 +1122,10 @@
       }
     }, {
       key: "parseConfig",
-      value: function parseConfig(element, settings) {
+      value: function parseConfig(element, Contact) {
         var _this = this;
         var data = extend({
-          descPosition: settings.descPosition
+          descPosition: Contact.descPosition
         }, this.defaults);
         if (isObject(element) && !isNode(element)) {
           if (!has(element, 'type')) {
@@ -1136,7 +1136,7 @@
             }
           }
           var objectData = extend(data, element);
-          this.setSize(objectData, settings);
+          this.setSize(objectData, Contact);
           return objectData;
         }
         var url = '';
@@ -1151,8 +1151,8 @@
         }
         data.href = url;
         each(data, function (val, key) {
-          if (has(settings, key) && key !== 'width') {
-            data[key] = settings[key];
+          if (has(Contact, key) && key !== 'width') {
+            data[key] = Contact[key];
           }
           var nodeData = element.dataset[key];
           if (!isNil(nodeData)) {
@@ -1216,16 +1216,16 @@
             data.description = nodeDesc.innerHTML;
           }
         }
-        this.setSize(data, settings, element);
+        this.setSize(data, Contact, element);
         this.slideConfig = data;
         return data;
       }
     }, {
       key: "setSize",
-      value: function setSize(data, settings) {
+      value: function setSize(data, Contact) {
         var element = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-        var defaultWith = data.type == 'video' ? this.checkSize(settings.videosWidth) : this.checkSize(settings.width);
-        var defaultHeight = this.checkSize(settings.height);
+        var defaultWith = data.type == 'video' ? this.checkSize(Contact.videosWidth) : this.checkSize(Contact.width);
+        var defaultHeight = this.checkSize(Contact.height);
         data.width = has(data, 'width') && data.width !== '' ? this.checkSize(data.width) : defaultWith;
         data.height = has(data, 'height') && data.height !== '' ? this.checkSize(data.height) : defaultHeight;
         if (element && data.type == 'image') {
@@ -1266,11 +1266,11 @@
         if (hasClass(slide, 'loaded')) {
           return false;
         }
-        var settings = this.instance.settings;
+        var Contact = this.instance.Contact;
         var slideConfig = this.slideConfig;
         var isMobileDevice = isMobile();
-        if (isFunction(settings.beforeSlideLoad)) {
-          settings.beforeSlideLoad({
+        if (isFunction(Contact.beforeSlideLoad)) {
+          Contact.beforeSlideLoad({
             index: this.index,
             slide: slide,
             player: false
@@ -1285,12 +1285,12 @@
         var finalCallback = callback;
         var titleID = 'gSlideTitle_' + this.index;
         var textID = 'gSlideDesc_' + this.index;
-        if (isFunction(settings.afterSlideLoad)) {
+        if (isFunction(Contact.afterSlideLoad)) {
           finalCallback = function finalCallback() {
             if (isFunction(callback)) {
               callback();
             }
-            settings.afterSlideLoad({
+            Contact.afterSlideLoad({
               index: _this.index,
               slide: slide,
               player: _this.instance.getSlidePlayerInstance(_this.index)
@@ -1310,8 +1310,8 @@
           }
           if (slideText && slideConfig.description !== '') {
             slideText.id = textID;
-            if (isMobileDevice && settings.moreLength > 0) {
-              slideConfig.smallDescription = this.slideShortDesc(slideConfig.description, settings.moreLength, settings.moreText);
+            if (isMobileDevice && Contact.moreLength > 0) {
+              slideConfig.smallDescription = this.slideShortDesc(slideConfig.description, Contact.moreLength, Contact.moreText);
               slideText.innerHTML = slideConfig.smallDescription;
               this.descriptionEvents(slideText, slideConfig);
             } else {
@@ -1338,8 +1338,8 @@
           if (slideConfig.draggable) {
             new DragSlides({
               dragEl: slide.querySelector('.gslide-inline'),
-              toleranceX: settings.dragToleranceX,
-              toleranceY: settings.dragToleranceY,
+              toleranceX: Contact.dragToleranceX,
+              toleranceY: Contact.dragToleranceY,
               slide: slide,
               instance: this.instance
             });
@@ -1352,8 +1352,8 @@
             if (slideConfig.draggable) {
               new DragSlides({
                 dragEl: img,
-                toleranceX: settings.dragToleranceX,
-                toleranceY: settings.dragToleranceY,
+                toleranceX: Contact.dragToleranceX,
+                toleranceY: Contact.dragToleranceY,
                 slide: slide,
                 instance: _this.instance
               });
@@ -1434,16 +1434,16 @@
     }, {
       key: "create",
       value: function create() {
-        return createHTML(this.instance.settings.slideHTML);
+        return createHTML(this.instance.Contact.slideHTML);
       }
     }, {
       key: "getConfig",
       value: function getConfig() {
         if (!isNode(this.element) && !this.element.hasOwnProperty('draggable')) {
-          this.element.draggable = this.instance.settings.draggable;
+          this.element.draggable = this.instance.Contact.draggable;
         }
-        var parser = new SlideConfigParser(this.instance.settings.slideExtraAttributes);
-        this.slideConfig = parser.parseConfig(this.element, this.instance.settings);
+        var parser = new SlideConfigParser(this.instance.Contact.slideExtraAttributes);
+        this.slideConfig = parser.parseConfig(this.element, this.instance.Contact);
         return this.slideConfig;
       }
     }]);
@@ -1922,14 +1922,14 @@
         if (vSwipe && mediaImage) {
           opacity = 1 - Math.abs(vDistance) / winHeight;
           overlay.style.opacity = opacity;
-          if (instance.settings.touchFollowAxis) {
+          if (instance.Contact.touchFollowAxis) {
             hDistancePercent = 0;
           }
         }
         if (hSwipe) {
           opacity = 1 - Math.abs(hDistance) / winWidth;
           media.style.opacity = opacity;
-          if (instance.settings.touchFollowAxis) {
+          if (instance.Contact.touchFollowAxis) {
             vDistancePercent = 0;
           }
         }
@@ -2139,7 +2139,7 @@
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       _classCallCheck(this, GlightboxInit);
       this.customOptions = options;
-      this.settings = extend(defaults, options);
+      this.Contact = extend(defaults, options);
       this.effectsClasses = this.getAnimationClasses();
       this.videoPlayers = {};
       this.apiEvents = [];
@@ -2172,7 +2172,7 @@
         this.activeSlide = null;
         this.prevActiveSlideIndex = null;
         this.prevActiveSlide = null;
-        var index = isNumber(startAt) ? startAt : this.settings.startAt;
+        var index = isNumber(startAt) ? startAt : this.Contact.startAt;
         if (isNode(element)) {
           var gallery = element.getAttribute('data-gallery');
           if (gallery) {
@@ -2190,7 +2190,7 @@
           index = 0;
         }
         this.build();
-        animateElement(this.overlay, this.settings.openEffect === 'none' ? 'none' : this.settings.cssEfects.fade["in"]);
+        animateElement(this.overlay, this.Contact.openEffect === 'none' ? 'none' : this.Contact.cssEfects.fade["in"]);
         var body = document.body;
         var scrollBar = window.innerWidth - document.documentElement.clientWidth;
         if (scrollBar > 0) {
@@ -2205,7 +2205,7 @@
         addClass(html, 'glightbox-open');
         if (isMobile$1) {
           addClass(document.body, 'glightbox-mobile');
-          this.settings.slideEffect = 'slide';
+          this.Contact.slideEffect = 'slide';
         }
         this.showSlide(index, true);
         if (this.elements.length === 1) {
@@ -2217,13 +2217,13 @@
         }
         this.lightboxOpen = true;
         this.trigger('open');
-        if (isFunction(this.settings.onOpen)) {
-          this.settings.onOpen();
+        if (isFunction(this.Contact.onOpen)) {
+          this.Contact.onOpen();
         }
-        if (isTouch$1 && this.settings.touchNavigation) {
+        if (isTouch$1 && this.Contact.touchNavigation) {
           touchNavigation(this);
         }
-        if (this.settings.keyboardNavigation) {
+        if (this.Contact.keyboardNavigation) {
           keyboardNavigation(this);
         }
       }
@@ -2272,7 +2272,7 @@
         }
         this.slideDescription = slideNode.querySelector('.gslide-description');
         this.slideDescriptionContained = this.slideDescription && hasClass(this.slideDescription.parentNode, 'gslide-media');
-        if (this.settings.preload) {
+        if (this.Contact.preload) {
           this.preloadSlide(index + 1);
           this.preloadSlide(index - 1);
         }
@@ -2370,7 +2370,7 @@
             var existingSlide = this.slidesContainer.querySelectorAll('.gslide')[index];
             this.slidesContainer.insertBefore(newSlide, existingSlide);
           }
-          if (this.settings.preload && this.index == 0 && index == 0 || this.index - 1 == index || this.index + 1 == index) {
+          if (this.Contact.preload && this.index == 0 && index == 0 || this.index - 1 == index || this.index + 1 == index) {
             this.preloadSlide(index);
           }
           if (this.index === 0 && index === 0) {
@@ -2390,8 +2390,8 @@
           trigger: null,
           player: addedSlidePlayer
         });
-        if (isFunction(this.settings.slideInserted)) {
-          this.settings.slideInserted({
+        if (isFunction(this.Contact.slideInserted)) {
+          this.Contact.slideInserted({
             index: index,
             slide: addedSlideNode,
             player: addedSlidePlayer
@@ -2418,8 +2418,8 @@
         }
         this.elements.splice(index, 1);
         this.trigger('slide_removed', index);
-        if (isFunction(this.settings.slideRemoved)) {
-          this.settings.slideRemoved(index);
+        if (isFunction(this.Contact.slideRemoved)) {
+          this.Contact.slideRemoved(index);
         }
       }
     }, {
@@ -2452,36 +2452,36 @@
         }
         removeClass(slide, this.effectsClasses);
         if (first) {
-          animateElement(slide, this.settings.cssEfects[this.settings.openEffect]["in"], function () {
-            if (_this4.settings.autoplayVideos) {
+          animateElement(slide, this.Contact.cssEfects[this.Contact.openEffect]["in"], function () {
+            if (_this4.Contact.autoplayVideos) {
               _this4.slidePlayerPlay(slide);
             }
             _this4.trigger('slide_changed', {
               prev: prevData,
               current: nextData
             });
-            if (isFunction(_this4.settings.afterSlideChange)) {
-              _this4.settings.afterSlideChange.apply(_this4, [prevData, nextData]);
+            if (isFunction(_this4.Contact.afterSlideChange)) {
+              _this4.Contact.afterSlideChange.apply(_this4, [prevData, nextData]);
             }
           });
         } else {
-          var effectName = this.settings.slideEffect;
-          var animIn = effectName !== 'none' ? this.settings.cssEfects[effectName]["in"] : effectName;
+          var effectName = this.Contact.slideEffect;
+          var animIn = effectName !== 'none' ? this.Contact.cssEfects[effectName]["in"] : effectName;
           if (this.prevActiveSlideIndex > this.index) {
-            if (this.settings.slideEffect == 'slide') {
-              animIn = this.settings.cssEfects.slideBack["in"];
+            if (this.Contact.slideEffect == 'slide') {
+              animIn = this.Contact.cssEfects.slideBack["in"];
             }
           }
           animateElement(slide, animIn, function () {
-            if (_this4.settings.autoplayVideos) {
+            if (_this4.Contact.autoplayVideos) {
               _this4.slidePlayerPlay(slide);
             }
             _this4.trigger('slide_changed', {
               prev: prevData,
               current: nextData
             });
-            if (isFunction(_this4.settings.afterSlideChange)) {
-              _this4.settings.afterSlideChange.apply(_this4, [prevData, nextData]);
+            if (isFunction(_this4.Contact.afterSlideChange)) {
+              _this4.Contact.afterSlideChange.apply(_this4, [prevData, nextData]);
             }
           });
         }
@@ -2499,8 +2499,8 @@
         var prevSlide = this.prevActiveSlide;
         removeClass(prevSlide, this.effectsClasses);
         addClass(prevSlide, 'prev');
-        var animation = this.settings.slideEffect;
-        var animOut = animation !== 'none' ? this.settings.cssEfects[animation].out : animation;
+        var animation = this.Contact.slideEffect;
+        var animOut = animation !== 'none' ? this.Contact.cssEfects[animation].out : animation;
         this.slidePlayerPause(prevSlide);
         this.trigger('slide_before_change', {
           prev: {
@@ -2522,8 +2522,8 @@
             player: this.getSlidePlayerInstance(this.index)
           }
         });
-        if (isFunction(this.settings.beforeSlideChange)) {
-          this.settings.beforeSlideChange.apply(this, [{
+        if (isFunction(this.Contact.beforeSlideChange)) {
+          this.Contact.beforeSlideChange.apply(this, [{
             index: this.prevActiveSlideIndex,
             slide: this.prevActiveSlide,
             player: this.getSlidePlayerInstance(this.prevActiveSlideIndex)
@@ -2533,8 +2533,8 @@
             player: this.getSlidePlayerInstance(this.index)
           }]);
         }
-        if (this.prevActiveSlideIndex > this.index && this.settings.slideEffect == 'slide') {
-          animOut = this.settings.cssEfects.slideBack.out;
+        if (this.prevActiveSlideIndex > this.index && this.Contact.slideEffect == 'slide') {
+          animOut = this.Contact.cssEfects.slideBack.out;
         }
         animateElement(prevSlide, animOut, function () {
           var container = prevSlide.querySelector('.ginner-container');
@@ -2612,8 +2612,8 @@
     }, {
       key: "slidePlayerPlay",
       value: function slidePlayerPlay(slide) {
-        var _this$settings$plyr$c;
-        if (isMobile$1 && !((_this$settings$plyr$c = this.settings.plyr.config) !== null && _this$settings$plyr$c !== void 0 && _this$settings$plyr$c.muted)) {
+        var _this$Contact$plyr$c;
+        if (isMobile$1 && !((_this$Contact$plyr$c = this.Contact.plyr.config) !== null && _this$Contact$plyr$c !== void 0 && _this$Contact$plyr$c.muted)) {
           return;
         }
         if (isNode(slide)) {
@@ -2625,7 +2625,7 @@
         var player = this.getSlidePlayerInstance(slide);
         if (player && !player.playing) {
           player.play();
-          if (this.settings.autofocusVideos) {
+          if (this.Contact.autofocusVideos) {
             player.elements.container.focus();
           }
         }
@@ -2634,7 +2634,7 @@
       key: "setElements",
       value: function setElements(elements) {
         var _this5 = this;
-        this.settings.elements = false;
+        this.Contact.elements = false;
         var newElements = [];
         if (elements && elements.length) {
           each(elements, function (el, i) {
@@ -2652,7 +2652,7 @@
           this.slidesContainer.innerHTML = '';
           if (this.elements.length) {
             each(this.elements, function () {
-              var slide = createHTML(_this5.settings.slideHTML);
+              var slide = createHTML(_this5.Contact.slideHTML);
               _this5.slidesContainer.appendChild(slide);
             });
             this.showSlide(0, true);
@@ -2677,8 +2677,8 @@
         var _this6 = this;
         var list = [];
         this.elements = this.elements ? this.elements : [];
-        if (!isNil(this.settings.elements) && isArray(this.settings.elements) && this.settings.elements.length) {
-          each(this.settings.elements, function (el, i) {
+        if (!isNil(this.Contact.elements) && isArray(this.Contact.elements) && this.Contact.elements.length) {
+          each(this.Contact.elements, function (el, i) {
             var slide = new Slide(el, _this6, i);
             var elData = slide.getConfig();
             var slideInfo = extend({}, elData);
@@ -2720,13 +2720,13 @@
     }, {
       key: "getSelector",
       value: function getSelector() {
-        if (this.settings.elements) {
+        if (this.Contact.elements) {
           return false;
         }
-        if (this.settings.selector && this.settings.selector.substring(0, 5) == 'data-') {
-          return "*[".concat(this.settings.selector, "]");
+        if (this.Contact.selector && this.Contact.selector.substring(0, 5) == 'data-') {
+          return "*[".concat(this.Contact.selector, "]");
         }
-        return this.settings.selector;
+        return this.Contact.selector;
       }
     }, {
       key: "getActiveSlide",
@@ -2742,9 +2742,9 @@
       key: "getAnimationClasses",
       value: function getAnimationClasses() {
         var effects = [];
-        for (var key in this.settings.cssEfects) {
-          if (this.settings.cssEfects.hasOwnProperty(key)) {
-            var effect = this.settings.cssEfects[key];
+        for (var key in this.Contact.cssEfects) {
+          if (this.Contact.cssEfects.hasOwnProperty(key)) {
+            var effect = this.Contact.cssEfects[key];
             effects.push("g".concat(effect["in"]));
             effects.push("g".concat(effect.out));
           }
@@ -2766,10 +2766,10 @@
             el.setAttribute('aria-hidden', 'true');
           }
         });
-        var nextSVG = has(this.settings.svg, 'next') ? this.settings.svg.next : '';
-        var prevSVG = has(this.settings.svg, 'prev') ? this.settings.svg.prev : '';
-        var closeSVG = has(this.settings.svg, 'close') ? this.settings.svg.close : '';
-        var lightboxHTML = this.settings.lightboxHTML;
+        var nextSVG = has(this.Contact.svg, 'next') ? this.Contact.svg.next : '';
+        var prevSVG = has(this.Contact.svg, 'prev') ? this.Contact.svg.prev : '';
+        var closeSVG = has(this.Contact.svg, 'close') ? this.Contact.svg.close : '';
+        var lightboxHTML = this.Contact.lightboxHTML;
         lightboxHTML = lightboxHTML.replace(/{nextSVG}/g, nextSVG);
         lightboxHTML = lightboxHTML.replace(/{prevSVG}/g, prevSVG);
         lightboxHTML = lightboxHTML.replace(/{closeSVG}/g, closeSVG);
@@ -2785,8 +2785,8 @@
         this.slidesContainer = document.getElementById('glightbox-slider');
         this.bodyHiddenChildElms = bodyChildElms;
         this.events = {};
-        addClass(this.modal, 'glightbox-' + this.settings.skin);
-        if (this.settings.closeButton && closeButton) {
+        addClass(this.modal, 'glightbox-' + this.Contact.skin);
+        if (this.Contact.closeButton && closeButton) {
           this.events['close'] = addEvent('click', {
             onElement: closeButton,
             withCallback: function withCallback(e, target) {
@@ -2795,7 +2795,7 @@
             }
           });
         }
-        if (closeButton && !this.settings.closeButton) {
+        if (closeButton && !this.Contact.closeButton) {
           closeButton.parentNode.removeChild(closeButton);
         }
         if (this.nextButton) {
@@ -2816,7 +2816,7 @@
             }
           });
         }
-        if (this.settings.closeOnOutsideClick) {
+        if (this.Contact.closeOnOutsideClick) {
           this.events['outClose'] = addEvent('click', {
             onElement: modal,
             withCallback: function withCallback(e, target) {
@@ -2883,7 +2883,7 @@
           }
         }
         if (video) {
-          var ratio = has(this.settings.plyr.config, 'ratio') ? this.settings.plyr.config.ratio : '';
+          var ratio = has(this.Contact.plyr.config, 'ratio') ? this.Contact.plyr.config.ratio : '';
           if (!ratio) {
             var containerWidth = video.clientWidth;
             var containerHeight = video.clientHeight;
@@ -2891,8 +2891,8 @@
             ratio = "".concat(containerWidth / divisor, ":").concat(containerHeight / divisor);
           }
           var videoRatio = ratio.split(':');
-          var videoWidth = this.settings.videosWidth;
-          var maxWidth = this.settings.videosWidth;
+          var videoWidth = this.Contact.videosWidth;
+          var maxWidth = this.Contact.videosWidth;
           if (isNumber(videoWidth) || videoWidth.indexOf('px') !== -1) {
             maxWidth = parseInt(videoWidth);
           } else {
@@ -2954,8 +2954,8 @@
     }, {
       key: "loop",
       value: function loop() {
-        var loop = has(this.settings, 'loopAtEnd') ? this.settings.loopAtEnd : null;
-        loop = has(this.settings, 'loop') ? this.settings.loop : loop;
+        var loop = has(this.Contact, 'loopAtEnd') ? this.Contact.loopAtEnd : null;
+        loop = has(this.Contact, 'loop') ? this.Contact.loop : loop;
         return loop;
       }
     }, {
@@ -2987,8 +2987,8 @@
           });
         }
         addClass(this.modal, 'glightbox-closing');
-        animateElement(this.overlay, this.settings.openEffect == 'none' ? 'none' : this.settings.cssEfects.fade.out);
-        animateElement(this.activeSlide, this.settings.cssEfects[this.settings.closeEffect].out, function () {
+        animateElement(this.overlay, this.Contact.openEffect == 'none' ? 'none' : this.Contact.cssEfects.fade.out);
+        animateElement(this.activeSlide, this.Contact.cssEfects[this.Contact.closeEffect].out, function () {
           _this8.activeSlide = null;
           _this8.prevActiveSlideIndex = null;
           _this8.prevActiveSlide = null;
@@ -3006,8 +3006,8 @@
           removeClass(body, 'glightbox-open touching gdesc-open glightbox-touch glightbox-mobile gscrollbar-fixer');
           _this8.modal.parentNode.removeChild(_this8.modal);
           _this8.trigger('close');
-          if (isFunction(_this8.settings.onClose)) {
-            _this8.settings.onClose();
+          if (isFunction(_this8.Contact.onClose)) {
+            _this8.Contact.onClose();
           }
           var styles = document.querySelector('.gcss-styles');
           if (styles) {

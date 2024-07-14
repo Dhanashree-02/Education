@@ -4,7 +4,7 @@
         <ul class="navbar-nav">
           
           <li class="nav-item d-none d-sm-inline-block">
-            <a target="_blank" href="<?php echo base_url ?>" class="nav-link"><?php echo (!isMobileDevice()) ? $_settings->info('name'):$_settings->info('short_name'); ?> - Admin Panel</a>
+            <a target="_blank" href="<?php echo base_url ?>" class="nav-link"><?php echo (!isMobileDevice()) ? $_Contact->info('name'):$_Contact->info('short_name'); ?> - Admin Panel</a>
           </li>
         </ul>
         <!-- Right navbar links -->

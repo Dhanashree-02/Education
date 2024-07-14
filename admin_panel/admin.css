@@ -12,6 +12,8 @@ body {
     width: 200px;
     display: flex;
     flex-direction: column;
+    height: 100vh; /* Adjust sidebar height to fill viewport */
+    overflow-y: auto; /* Enable scrolling within the sidebar */
 }
 .sidebar a {
     color: #fff;
@@ -30,4 +32,5 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     margin: 20px;
+    
 }

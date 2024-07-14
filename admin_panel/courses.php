@@ -82,7 +82,7 @@ $conn->close();
     <a href="../admin_dashboard.php"><h2>Admin Dashboard</h2></a>
     <a href="dashboard.php">Dashboard</a>
     <a href="courses.php">Courses</a>
-    <a href="settings.php">Settings</a>
+    <a href="Contact.php">Contact</a>
     <a href="#" onclick="confirmLogout()">Logout</a>
 </div>
 
