@@ -80,7 +80,7 @@ $conn->close();
 
 <div class="sidebar">
     <a href="../admin_dashboard.php"><h2>Admin Dashboard</h2></a>
-    <a href="dashboard.php">Dashboard</a>
+    <a href="universities.php">Universities</a>
     <a href="courses.php">Courses</a>
     <a href="Contact.php">Contact</a>
     <a href="#" onclick="confirmLogout()">Logout</a>
@@ -103,15 +103,23 @@ $conn->close();
 
     <form action="courses.php" method="post" class="course-form">
         <input type="hidden" id="course_id" name="course_id">
-        <label for="course_title">Course Title:</label>
-        <input placeholder="Enter course title" type="text" id="course_title" name="course_title" required class="form-input"><br><br>
-        <label for="course_description">Course Description:</label>
-        <textarea placeholder="Enter course description" id="course_description" name="course_description" required class="form-textarea"></textarea><br><br>
-        <input type="submit" value="Add Course" id="form-submit" class="form-submit">
+        <table class="form-table">
+            <tr>
+                <td><label for="course_title">Course Title:</label></td>
+                <td><input placeholder="Enter course title" type="text" id="course_title" name="course_title" required class="form-input"></td>
+            </tr>
+            <tr>
+                <td><label for="course_description">Course Description:</label></td>
+                <td><textarea placeholder="Enter course description" id="course_description" name="course_description" required class="form-textarea"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center"><input type="submit" value="Add Course" id="form-submit" class="form-submit"></td>
+            </tr>
+        </table>
     </form>
 
-    <h3>Existing Courses</h3>
-    <table>
+
+    <table class="courses-table">
         <thead>
             <tr>
                 <th>Title</th>
