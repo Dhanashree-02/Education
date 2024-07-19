@@ -6,6 +6,22 @@ if (!isset($_SESSION['username'])) {
     header('Location: index.html'); // Redirect to login page if not logged in
     exit;
 }
+
+// Database connection setup (replace with your actual database connection code)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "softkey";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to fetch contact information from database
+$sql = "SELECT * FROM contacts";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -13,53 +29,11 @@ if (!isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            height: 100vh;
-            margin: 0;
-        }
-        .sidebar {
-            background-color: #3f4d67;
-            color: #fff;
-            padding: 20px;
-            width: 200px;
-            display: flex;
-            flex-direction: column;
-        }
-        .sidebar a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 0;
-            margin: 5px 0;
-            border-bottom: 1px solid #a9b7d0;
-        }
-        .sidebar a:hover {
-            color: #39afd3;
-        }
-        .main-content {
-            flex-grow: 1;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-            margin: 20px;
-        }
-        .logout-button {
-            padding: 10px 20px;
-            background-color: #dc3545;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        .logout-button:hover {
-            background-color: #c82333;
-        }
-    </style>
+    <title>Admin Dashboard - Contact</title>
+    
+    <link href="admin_panel.css" rel="stylesheet">
+    <link rel = "stylesheet" href = "Contact.css">
+  
 </head>
 <body>
 
@@ -73,18 +47,57 @@ if (!isset($_SESSION['username'])) {
 </div>
 
 <div class="main-content">
-    <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
-    <p>Contact</p>
-    
+    <h3>Contact</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row['id'] . "</td>";
+                    echo "<td>" . $row['name'] . "</td>";
+                    echo "<td>" . $row['email'] . "</td>";
+                    echo "<td>" . $row['subject'] . "</td>";
+                    echo "<td>" . $row['message'] . "</td>";
+                    echo "<td>" . $row['created_at'] . "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='6'>No contacts found</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 </div>
 
 <script>
-    function confirmLogout() {
-        if (confirm('Are you sure you want to log out?')) {
-            window.location.href = '../index.html'; // Redirect to logout page
-        }
+     function confirmLogout() {
+    return confirm('Are you sure you want to log out?');
+}
+
+// Example usage in a logout button click event
+document.getElementById('logoutButton').addEventListener('click', function(event) {
+    if (!confirmLogout()) {
+        event.preventDefault(); // Prevents the default action (logging out)
     }
+});
 </script>
 
 </body>
 </html>
+
+<?php
+// Close database connection
+$conn->close();
+?>
