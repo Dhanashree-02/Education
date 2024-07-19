@@ -1,70 +1,11 @@
 <?php
 session_start();
 
+// Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header('Location: index.html');
+    header('Location: index.html'); // Redirect to login page if not logged in
     exit;
 }
-
-// Database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "SoftKey";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Process form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $course_title = $_POST["course_title"];
-    $course_description = $_POST["course_description"];
-
-    if (isset($_POST["course_id"]) && !empty($_POST["course_id"])) {
-        // Update existing course
-        $course_id = $_POST["course_id"];
-        $stmt = $conn->prepare("UPDATE courses SET course_title = ?, course_description = ? WHERE id = ?");
-        $stmt->bind_param("ssi", $course_title, $course_description, $course_id);
-
-        if ($stmt->execute()) {
-            $_SESSION['success_message'] = "Course updated successfully";
-        } else {
-            $_SESSION['error_message'] = "Error: " . $stmt->error;
-        }
-    } else {
-        // Insert new course
-        $stmt = $conn->prepare("INSERT INTO courses (course_title, course_description) VALUES (?, ?)");
-        $stmt->bind_param("ss", $course_title, $course_description);
-
-        if ($stmt->execute()) {
-            $_SESSION['success_message'] = "New course added successfully";
-        } else {
-            $_SESSION['error_message'] = "Error: " . $stmt->error;
-        }
-    }
-
-    header('Location: courses.php');
-    exit;
-
-    $stmt->close();
-}
-
-// Fetch existing courses
-$courses = [];
-$result = $conn->query("SELECT id, course_title, course_description FROM courses");
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $courses[] = $row;
-    }
-}
-
-// Close the connection
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -72,87 +13,76 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses</title>
-    <link rel="stylesheet" href="admin.css">
-    <link rel="stylesheet" href="courses.css">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+        .sidebar {
+            background-color: #3f4d67;
+            color: #fff;
+            padding: 20px;
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 0;
+            margin: 5px 0;
+            border-bottom: 1px solid #a9b7d0;
+        }
+        .sidebar a:hover {
+            color: #39afd3;
+        }
+        .main-content {
+            flex-grow: 1;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin: 20px;
+        }
+        .logout-button {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
 <body>
 
 <div class="sidebar">
-    <a href="../admin_dashboard.php"><h2>Admin Dashboard</h2></a>
+<a href="../admin_dashboard.php""><h2>Admin Dashboard</h2></a>
     <a href="universities.php">Universities</a>
     <a href="courses.php">Courses</a>
     <a href="Contact.php">Contact</a>
-    <a href="#" onclick="confirmLogout()">Logout</a>
+    <a href="logout.php" onclick="return confirmLogout()">Logout</a>
+
 </div>
 
 <div class="main-content">
-    <h2>Courses</h2>
-
-    <!-- Display success or error message -->
-    <?php
-    if (isset($_SESSION['success_message'])) {
-        echo "<div class='success-message'>" . $_SESSION['success_message'] . "</div>";
-        unset($_SESSION['success_message']);
-    }
-    if (isset($_SESSION['error_message'])) {
-        echo "<div class='error-message'>" . $_SESSION['error_message'] . "</div>";
-        unset($_SESSION['error_message']);
-    }
-    ?>
-
-    <form action="courses.php" method="post" class="course-form">
-        <input type="hidden" id="course_id" name="course_id">
-        <table class="form-table">
-            <tr>
-                <td><label for="course_title">Course Title:</label></td>
-                <td><input placeholder="Enter course title" type="text" id="course_title" name="course_title" required class="form-input"></td>
-            </tr>
-            <tr>
-                <td><label for="course_description">Course Description:</label></td>
-                <td><textarea placeholder="Enter course description" id="course_description" name="course_description" required class="form-textarea"></textarea></td>
-            </tr>
-            <tr>
-                <td colspan="2" class="text-center"><input type="submit" value="Add Course" id="form-submit" class="form-submit"></td>
-            </tr>
-        </table>
-    </form>
-
-
-    <table class="courses-table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($courses as $course): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($course['course_title']); ?></td>
-                    <td><?php echo htmlspecialchars($course['course_description']); ?></td>
-                    <td>
-                        <button onclick="editCourse(<?php echo $course['id']; ?>, '<?php echo htmlspecialchars(addslashes($course['course_title'])); ?>', '<?php echo htmlspecialchars(addslashes($course['course_description'])); ?>')">Edit</button>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
+    <p>Courses</p>
+    
 </div>
 
 <script>
     function confirmLogout() {
         if (confirm('Are you sure you want to log out?')) {
-            window.location.href = 'logout.php'; // Redirect to logout page
+            window.location.href = '../index.html'; // Redirect to logout page
         }
-    }
-
-    function editCourse(id, title, description) {
-        document.getElementById('course_id').value = id;
-        document.getElementById('course_title').value = title;
-        document.getElementById('course_description').value = description;
-        document.getElementById('form-submit').value = 'Update Course';
     }
 </script>
 
