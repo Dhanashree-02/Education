@@ -3,10 +3,7 @@
 session_start();
 
 // Database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "SoftKey";
+include 'Database.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -207,7 +204,6 @@ $conn->close();
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SoftKey Education</strong> 
         <span>All Rights Reserved</span></p>
       <div class="credits">
-        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
       </div>
     </div>
 

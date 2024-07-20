@@ -81,7 +81,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="admin_panel.css" rel="stylesheet">
-
+    <link rel = "Stylesheet" href = "Courses.css"
 </head>
 <body>
 
@@ -108,19 +108,19 @@ $conn->close();
     }
     ?>
 
-    <form action="courses.php" method="post" class="course-form">
+    <form action="courses.php" method="post" class="course-form" style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 5px; margin: 20px 0;">
         <input type="hidden" id="course_id" name="course_id">
-        <table class="form-table">
+        <table class="form-table" style="width: 100%;">
             <tr>
-                <td><label for="course_title">Course Title:</label></td>
-                <td><input placeholder="Enter course title" type="text" id="course_title" name="course_title" required class="form-input"></td>
+                <td style="width: 20%;"><label for="course_title" style="font-weight: bold;">Course Title:</label></td>
+                <td style="width: 80%;"><input placeholder="Enter course title" type="text" id="course_title" name="course_title" required class="form-input" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter course title'" style="width: 100%; padding: 10px; border: 1px solid #ccc;"></td>
             </tr>
             <tr>
-                <td><label for="course_description">Course Description:</label></td>
-                <td><textarea placeholder="Enter course description" id="course_description" name="course_description" required class="form-textarea"></textarea></td>
+                <td style="width: 20%;"><label for="course_description" style="font-weight: bold;">Course Description:</label></td>
+                <td style="width: 80%;"><textarea placeholder="Enter course description" id="course_description" name="course_description" required class="form-textarea" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter course description'" style="width: 100%; padding: 10px; border: 1px solid #ccc;"></textarea></td>
             </tr>
             <tr>
-                <td colspan="2" class="text-center"><input type="submit" value="Add Course" id="form-submit" class="form-submit"></td>
+                <td colspan="2" class="text-center" style="text-align: center; padding: 10px;"><input type="submit" value="Add Course" id="form-submit" class="form-submit" style="background-color: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; border-radius: 5px;"></td>
             </tr>
         </table>
     </form>
@@ -139,11 +139,11 @@ $conn->close();
                     <td><?php echo htmlspecialchars($course['course_title']); ?></td>
                     <td><?php echo htmlspecialchars($course['course_description']); ?></td>
                     <td>
-                        <button onclick="editCourse(<?php echo $course['id']; ?>, '<?php echo htmlspecialchars(addslashes($course['course_title'])); ?>', '<?php echo htmlspecialchars(addslashes($course['course_description'])); ?>')">Edit</button>
+                        <button onclick="editCourse(<?php echo $course['id']; ?>, '<?php echo htmlspecialchars(addslashes($course['course_title'])); ?>', '<?php echo htmlspecialchars(addslashes($course['course_description'])); ?>')" style="background-color: #4CAF50; color: white; padding: 10px 15px; border: none; cursor: pointer; border-radius: 5px;">Edit</button>
                         <form action="courses.php" method="post" style="display: inline-block;">
                             <input type="hidden" name="course_id" value="<?php echo $course['id']; ?>">
                             <input type="hidden" name="action" value="delete">
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this course?')">Delete</button>
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this course?')" style="background-color: #f44336; color: white; padding: 10px 15px; border: none; cursor: pointer; border-radius: 5px;">Delete</button>
                         </form>
                     </td>
                 </tr>

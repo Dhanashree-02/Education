@@ -47,6 +47,7 @@ $result = $conn->query($sql);
 </div>
 
 <div class="main-content">
+<h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
     <h3>Contact</h3>
 
     <table>

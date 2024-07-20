@@ -1,1 +1,0 @@
-<h1>Welcome to <?php echo $_Contact->info('name') ?></h1>
