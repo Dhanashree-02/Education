@@ -9,13 +9,13 @@
     padding: 10px;
 }
 .main-content th {
-    background-color: #007bff; 
+    background-color: rgb(178, 170, 170); 
     font-weight: bold;
     color: #fff; 
 }
 .main-content tr {
     transition: transform 0.5s ease;
-    background-color: #007bff; 
+    background-color: whitesmoke; 
 
 }
 .main-content tr:hover {

@@ -1,14 +1,8 @@
 
-.courses-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
 .courses-table th,
 .courses-table td {
   border: 1px solid #ddd;
   text-align: left;
-  padding: 10px;
 }
 
 .courses-table th {
