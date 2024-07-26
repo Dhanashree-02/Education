@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header('Location: login.php'); // Redirect to login page if not logged in
+    header('Location: index.html'); // Redirect to login page if not logged in
     exit;
 }
 ?>
@@ -22,7 +22,7 @@ if (!isset($_SESSION['username'])) {
     <a href="../admin_dashboard.php"><h2>Admin Dashboard</h2></a>
     <a href="universities.php">Universities</a>
     <a href="courses.php">Courses</a>
-    <a href="contact.php">Contact</a>
+    <a href="Contact.php">Contact</a>
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 </div>
 
@@ -30,28 +30,28 @@ if (!isset($_SESSION['username'])) {
     <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
     <h2>Universities</h2>
 
-    <h2>Add Universities</h2>
+    <h1>Add Universities</h1>
     <?php
     if (isset($_SESSION['uploadSuccess'])) {
-        echo "<p style='color:green'>" . htmlspecialchars($_SESSION['uploadSuccess']) . "</p>";
+        echo "<p style='color:green'>" . $_SESSION['uploadSuccess'] . "</p>";
         unset($_SESSION['uploadSuccess']);
     }
     if (isset($_SESSION['uploadError'])) {
-        echo "<p style='color:red'>" . htmlspecialchars($_SESSION['uploadError']) . "</p>";
+        echo "<p style='color:red'>" . $_SESSION['uploadError'] . "</p>";
         unset($_SESSION['uploadError']);
     }
     ?>
 
     <form action="upload.php" method="POST" enctype="multipart/form-data" id="uploadForm">
-        <input type="file" name="imageFile" id="imageFile" required>
+        <input type="file" name="imageFile" id="imageFile">
         <button type="submit" name="submit">Upload Image</button>
     </form>
 
     <h2>Uploaded Image Preview</h2>
-    <div id="imagePreview">
+    <div id="imagePreview" style="width: 300px; height: 300px;">
         <?php
         if (isset($_SESSION['uploadedFile'])) {
-            echo "<img src='" . htmlspecialchars($_SESSION['uploadedFile']) . "' style='max-width:10%;'>";
+            echo "<img src='" . htmlspecialchars($_SESSION['uploadedFile']) . "' style='max-width:100%'>";
         }
         ?>
     </div>
