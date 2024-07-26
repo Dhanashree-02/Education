@@ -38,7 +38,7 @@ if (!isset($_SESSION['username'])) {
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="universities.php" class="active">Universities</a></li>
+                <li><a href="universities.html" class="active">Universities</a></li>
                 <li><a href="courses.php">Courses</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -79,26 +79,39 @@ if (!isset($_SESSION['username'])) {
                 if (is_dir($uploadDir)) {
                     $files = array_diff(scandir($uploadDir), array('.', '..'));
                     foreach ($files as $file) {
-                        $filePath = $uploadDir . $file;
-                        // Ensure the file is an image
-                        $fileInfo = getimagesize($filePath);
-                        if ($fileInfo !== false) {
-                            echo '<div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">';
-                            echo '<div class="course-item" style="border-color: black;">';
-                            echo '<img src="' . htmlspecialchars($filePath) . '" class="img-fluid" alt="University Image">';
-                            echo '<div class="course-content">';
-                            echo '<div class="d-flex justify-content-between align-items-center mb-3">';
-                            echo '<p class="category">University</p>';
-                            echo '</div>';
-                            echo '<h3><a href="#">' . htmlspecialchars(pathinfo($file, PATHINFO_FILENAME)) . '</a></h3>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
+                        echo '<div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">';
+                        echo '<div class="course-item" style="border-color: black;">';
+                        echo '<img src="' . $uploadDir . htmlspecialchars($file) . '" class="img-fluid" alt="...">';
+                        echo '<div class="course-content">';
+                        echo '<div class="d-flex justify-content-between align-items-center mb-3">';
+                        echo '<p class="category">University</p>';
+                        echo '</div>';
+                        echo '<h3><a href="#">' . pathinfo($file, PATHINFO_FILENAME) . '</a></h3>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
                     }
                 }
                 ?>
             </div>
+
+            <div id="imagePreview"></div>
+
+            <script>
+                // Function to update image preview on file selection
+                function updateImagePreview(event) {
+                    var imageFile = event.target.files[0];
+                    var imageUrl = URL.createObjectURL(imageFile);
+                    var imgElement = document.createElement('img');
+                    imgElement.src = imageUrl;
+                    imgElement.style.maxWidth = '100%'; // Limit image width if needed
+                    document.getElementById('imagePreview').innerHTML = ''; // Clear previous preview
+                    document.getElementById('imagePreview').appendChild(imgElement);
+                }
+
+                // Attach event listener to file input
+                document.getElementById('imageFile').addEventListener('change', updateImagePreview);
+            </script>
         </div>
     </section>
 </main>
@@ -117,10 +130,10 @@ if (!isset($_SESSION['username'])) {
                     <p><strong>Email:</strong> <span>info@softkeyeducation.com</span></p>
                 </div>
                 <div class="social-links d-flex mt-4">
-                    <a href="#"><i class="bi bi-twitter"></i></a>
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="bi bi-instagram"></i></a>
-                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
                 </div>
             </div>
 
@@ -163,7 +176,7 @@ if (!isset($_SESSION['username'])) {
         <p>© <span>Copyright</span> <strong class="px-1 sitename">SoftKey Education</strong>
             <span>All Rights Reserved</span></p>
         <div class="credits">
-        
+            <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
         </div>
     </div>
 </footer>
@@ -178,6 +191,90 @@ if (!isset($_SESSION['username'])) {
 <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
 <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="assets/js/main.js"></script>
+
+</body>
+</html>
+this is my code for frontend
+<?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['username'])) {
+    header('Location: index.html'); // Redirect to login page if not logged in
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universities</title>
+    <link href="admin_panel.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="sidebar">
+    <a href="../admin_dashboard.php"><h2>Admin Dashboard</h2></a>
+    <a href="universities.php">Universities</a>
+    <a href="courses.php">Courses</a>
+    <a href="Contact.php">Contact</a>
+    <a href="logout.php" onclick="return confirmLogout()">Logout</a>
+</div>
+
+<div class="main-content">
+    <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
+    <h2>Universities</h2>
+
+    <h1>Add Universities</h1>
+    <?php
+    if (isset($_SESSION['uploadSuccess'])) {
+        echo "<p style='color:green'>" . $_SESSION['uploadSuccess'] . "</p>";
+        unset($_SESSION['uploadSuccess']);
+    }
+    if (isset($_SESSION['uploadError'])) {
+        echo "<p style='color:red'>" . $_SESSION['uploadError'] . "</p>";
+        unset($_SESSION['uploadError']);
+    }
+    ?>
+
+    <form action="upload.php" method="POST" enctype="multipart/form-data" id="uploadForm">
+        <input type="file" name="imageFile" id="imageFile">
+        <button type="submit" name="submit">Upload Image</button>
+    </form>
+
+    <h2>Uploaded Image Preview</h2>
+    <div id="imagePreview">
+        <?php
+        if (isset($_SESSION['uploadedFile'])) {
+            echo "<img src='" . htmlspecialchars($_SESSION['uploadedFile']) . "' style='max-width:100%'>";
+        }
+        ?>
+    </div>
+
+    <script>a
+        // Function to update image preview on file selection
+        function updateImagePreview(event) {
+            var imageFile = event.target.files[0];
+            var imageUrl = URL.createObjectURL(imageFile);
+            var imgElement = document.createElement('img');
+            imgElement.src = imageUrl;
+            imgElement.style.maxWidth = '100%'; // Limit image width if needed
+            document.getElementById('imagePreview').innerHTML = ''; // Clear previous preview
+            document.getElementById('imagePreview').appendChild(imgElement);
+        }
+
+        // Attach event listener to file input
+        document.getElementById('imageFile').addEventListener('change', updateImagePreview);
+    </script>
+</div>
+
+<script>
+    function confirmLogout() {
+        return confirm('Are you sure you want to log out?');
+    }
+</script>
 
 </body>
 </html>
