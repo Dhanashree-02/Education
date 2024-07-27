@@ -38,7 +38,7 @@ if (!isset($_SESSION['username'])) {
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="universities.html" class="active">Universities</a></li>
+                <li><a href="universities.php" class="active">Universities</a></li>
                 <li><a href="courses.php">Courses</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>

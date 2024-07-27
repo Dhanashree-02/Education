@@ -34,7 +34,7 @@
 }
 
 .dark-background {
-  --background-color: #060606;
+  --background-color: #a54c4c;
   --default-color: #ffffff;
   --heading-color: #ffffff;
   --surface-color: #252525;
@@ -889,7 +889,7 @@ section,
 }
 
 .hero .container {
-  position: relative;
+  position: absolute;
   z-index: 3;
 }
 

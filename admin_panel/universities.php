@@ -6,6 +6,15 @@ if (!isset($_SESSION['username'])) {
     header('Location: index.html'); // Redirect to login page if not logged in
     exit;
 }
+
+// Directory path to the uploads folder
+$uploadsDir = 'assets/uploads/';
+$images = array_diff(scandir($uploadsDir), array('..', '.')); // Get all files, excluding '.' and '..'
+
+// Filter to keep only valid image files
+$images = array_filter($images, function($file) use ($uploadsDir) {
+    return preg_match('/\.(jpg|jpeg|png|gif)$/i', $file) && is_file($uploadsDir . $file);
+});
 ?>
 
 <!DOCTYPE html>
@@ -47,11 +56,17 @@ if (!isset($_SESSION['username'])) {
         <button type="submit" name="submit">Upload Image</button>
     </form>
 
-    <h2>Uploaded Image Preview</h2>
-    <div id="imagePreview" style="width: 300px; height: 300px;">
+    <h2>Uploaded Images Preview</h2>
+    <div id="imagePreview" style="display: flex; flex-wrap: wrap; gap: 10px;">
         <?php
-        if (isset($_SESSION['uploadedFile'])) {
-            echo "<img src='" . htmlspecialchars($_SESSION['uploadedFile']) . "' style='max-width:100%'>";
+        foreach ($images as $image) {
+            echo "<div style='position: relative; display: inline-block;'>";
+            echo "<img src='" . htmlspecialchars($uploadsDir . $image) . "' style='width: 100px; height: auto;'>";
+            echo "<form action='delete.php' method='POST' style='position: absolute; top: 0; right: 0;'>";
+            echo "<input type='hidden' name='filename' value='" . htmlspecialchars($image) . "'>";
+            echo "<button type='submit' style='background: red; color: white; border: none; cursor: pointer;'>X</button>";
+            echo "</form>";
+            echo "</div>";
         }
         ?>
     </div>
