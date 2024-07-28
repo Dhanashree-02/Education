@@ -1,20 +1,15 @@
+
 <?php
+// Start session
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['username'])) {
-    header('Location: index.html'); // Redirect to login page if not logged in
-    exit;
-}
+// Database connection parameters
+include 'Database.php';
 
-// Database connection setup (replace with your actual database connection code)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "softkey";
-
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -41,6 +36,7 @@ $result = $conn->query($sql);
 <a href="../admin_dashboard.php""><h2>Admin Dashboard</h2></a>
     <a href="universities.php">Universities</a>
     <a href="courses.php">Courses</a>
+    <a href="Slider.php">Slider</a>
     <a href="Contact.php">Contact</a>
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 

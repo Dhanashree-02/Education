@@ -856,6 +856,15 @@ section,
   text-transform: uppercase;
 }
 
+/* *--------------------------------------------------------------
+# Slider Section
+--------------------------------------------------------------*/ */
+.Slider{
+  margin: 0%;
+  padding: 0%;
+  height: 50%;
+}
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -869,7 +878,7 @@ section,
   justify-content: center;
   color: var(--default-color);
 }
-
+/* 
 .hero img {
   position: absolute;
   inset: 0;
@@ -878,7 +887,7 @@ section,
   height: 100%;
   object-fit: cover;
   z-index: 1;
-}
+} */
 
 .hero:before {
   content: "";

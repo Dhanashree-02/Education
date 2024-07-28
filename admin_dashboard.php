@@ -20,9 +20,10 @@ if (!isset($_SESSION['username'])) {
 <body>
 
 <div class="sidebar">
-<a href="admin_dashboard.php"><h2>Admin Dashboard</h2></a>
+    <a href="admin_dashboard.php"><h2>Admin Dashboard</h2></a>
     <a href="admin_panel/universities.php">Universities</a>
     <a href="admin_panel/courses.php">Courses</a>
+    <a href="admin_panel/Slider.php">Slider</a>
     <a href="admin_panel/Contact.php">Contact</a>
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 

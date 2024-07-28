@@ -8,10 +8,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Database configuration
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "Softkey";
+include 'Database.php';
 
 // Create a connection to the database
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -89,13 +86,15 @@ $conn->close();
     <a href="../admin_dashboard.php"><h2>Admin Dashboard</h2></a>
     <a href="universities.php">Universities</a>
     <a href="courses.php">Courses</a>
+    <a href="Slider.php">Slider</a>
     <a href="Contact.php">Contact</a>
+
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 </div>
 
 <div class="main-content">
     <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
-    <p>Courses</p>
+    <h3>Courses</h3>
     
     <?php
     if (isset($_SESSION['success_message'])) {

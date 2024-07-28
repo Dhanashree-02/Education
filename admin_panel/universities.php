@@ -31,40 +31,41 @@ $images = array_filter($images, function($file) use ($uploadsDir) {
     <a href="../admin_dashboard.php"><h2>Admin Dashboard</h2></a>
     <a href="universities.php">Universities</a>
     <a href="courses.php">Courses</a>
+    <a href="Slider.php">Slider</a>
     <a href="Contact.php">Contact</a>
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 </div>
 
 <div class="main-content">
     <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
-    <h2>Universities</h2>
+    <h3>Universities</h3>
 
-    <h1>Add Universities</h1>
+    <h3>Add Universities</h3>
     <?php
     if (isset($_SESSION['uploadSuccess'])) {
-        echo "<p style='color:green'>" . $_SESSION['uploadSuccess'] . "</p>";
+        echo "<p class='upload-success'>" . $_SESSION['uploadSuccess'] . "</p>";
         unset($_SESSION['uploadSuccess']);
     }
     if (isset($_SESSION['uploadError'])) {
-        echo "<p style='color:red'>" . $_SESSION['uploadError'] . "</p>";
+        echo "<p class='upload-error'>" . $_SESSION['uploadError'] . "</p>";
         unset($_SESSION['uploadError']);
     }
     ?>
 
-    <form action="upload.php" method="POST" enctype="multipart/form-data" id="uploadForm">
-        <input type="file" name="imageFile" id="imageFile">
-        <button type="submit" name="submit">Upload Image</button>
+    <form action="upload.php" method="POST" enctype="multipart/form-data" id="uploadForm" class="upload-form" style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 5px; margin: 20px 0;">
+        <input type="file" name="imageFile" id="imageFile" class="file-input" style="width: 100%; padding: 10px; border: 1px solid #ccc;">
+        <button type="submit" name="submit" class="upload-button" style="background-color: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; border-radius: 5px;">Upload Image</button>
     </form>
 
-    <h2>Uploaded Images Preview</h2>
-    <div id="imagePreview" style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <h3>Uploaded Images Preview</h3>
+    <div id="imagePreview" class="image-preview-container">
         <?php
         foreach ($images as $image) {
-            echo "<div style='position: relative; display: inline-block;'>";
-            echo "<img src='" . htmlspecialchars($uploadsDir . $image) . "' style='width: 100px; height: auto;'>";
-            echo "<form action='delete.php' method='POST' style='position: absolute; top: 0; right: 0;'>";
+            echo "<div class='image-preview'>";
+            echo "<img src='" . htmlspecialchars($uploadsDir . $image) . "' class='image-preview-image'>";
+            echo "<form action='delete.php' method='POST' class='image-preview-delete-form'>";
             echo "<input type='hidden' name='filename' value='" . htmlspecialchars($image) . "'>";
-            echo "<button type='submit' style='background: red; color: white; border: none; cursor: pointer;'>X</button>";
+            echo "<button type='submit' class='image-preview-delete-button'>X</button>";
             echo "</form>";
             echo "</div>";
         }
