@@ -31,67 +31,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<style>
-  /* Slideshow container */
-.slideshow-container {
-  max-width: 100%;
-  position: relative;
-  margin: 0%;
-  padding: 0%;
-}
 
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
+<!-- jQuery and Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.dot .active {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .text {font-size: 11px}
-}
-</style>
 </head>
 
 <body class="index-page">
@@ -110,7 +54,6 @@
           <li><a href="about.html">About</a></li>
           <li><a href="universities.php">Universities</a></li>
           <li><a href="courses.php">Courses</a></li>
-         
           <li><a href="contact.html">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -139,47 +82,57 @@
 
     </section>  -->
     <!-- /Hero Section -->
-    <section id = "Slider" class="Slider Section">
+  
+     <!-- Slider Section -->
+       <section id="slider" class="slider section">
+      <?php
+        session_start();
+        include 'Database.php';
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $sql = "SELECT image_path FROM slider ORDER BY position ASC";
+        $result = $conn->query($sql);
+        $images = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $images[] = $row['image_path'];
+            }
+        } else {
+            echo "<p>No images found in the database.</p>";
+        }
+        $conn->close();
+      ?>
       <div class="container">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
-          <!-- Indicators -->
           <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <?php foreach ($images as $index => $image): ?>
+              <li data-target="#myCarousel" data-slide-to="<?php echo $index; ?>" class="<?php echo $index === 0 ? 'active' : ''; ?>"></li>
+            <?php endforeach; ?>
           </ol>
-      
-          <!-- Wrapper for slides -->
           <div class="carousel-inner">
-            <div class="item active">
-              <img src="assets/img/hero-bg.jpg" alt="" style="width:100%;">
-            </div>
-      
-            <div class="item">
-              <img src="assets/img/about.jpg" alt="" style="width:100%;">
-            </div>
-          
-            <div class="item">
-              <img src="assets/img/course-3.jpg" alt="" style="width:100%;">
-            </div>
+            <?php foreach ($images as $index => $image): ?>
+              <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                <img src="<?php echo $image; ?>" alt="Slide <?php echo $index + 1; ?>" style="width:100%;">
+              </div>
+            <?php endforeach; ?>
           </div>
-      
-          <!-- Left and right controls -->
-          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
+          <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
+          <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
             <span class="sr-only">Next</span>
           </a>
         </div>
       </div>
-
     </section>
-   
+    <!-- /Slider Section -->
 
-    <!-- About Section -->
+
+  <!-- About Section -->
     <section id="about" class="about section">
 
       <div class="container">

@@ -58,14 +58,14 @@ $images = array_filter($images, function($file) use ($uploadsDir) {
     </form>
 
     <h3>Uploaded Images Preview</h3>
-    <div id="imagePreview" class="image-preview-container">
+    <div id="imagePreview" style="display: flex; flex-wrap: wrap; gap: 10px;">
         <?php
         foreach ($images as $image) {
-            echo "<div class='image-preview'>";
-            echo "<img src='" . htmlspecialchars($uploadsDir . $image) . "' class='image-preview-image'>";
-            echo "<form action='delete.php' method='POST' class='image-preview-delete-form'>";
+            echo "<div style='position: relative; display: inline-block;'>";
+            echo "<img src='" . htmlspecialchars($uploadsDir . $image) . "' style='width: 100px; height: auto;'>";
+            echo "<form action='delete.php' method='POST' style='position: absolute; top: 0; right: 0;'>";
             echo "<input type='hidden' name='filename' value='" . htmlspecialchars($image) . "'>";
-            echo "<button type='submit' class='image-preview-delete-button'>X</button>";
+            echo "<button type='submit' style='background: red; color: white; border: none; cursor: pointer;'>X</button>";
             echo "</form>";
             echo "</div>";
         }
@@ -90,9 +90,16 @@ $images = array_filter($images, function($file) use ($uploadsDir) {
 </div>
 
 <script>
-    function confirmLogout() {
-        return confirm('Are you sure you want to log out?');
+     function confirmLogout() {
+    return confirm('Are you sure you want to log out?');
+}
+
+// Example usage in a logout button click event
+document.getElementById('logoutButton').addEventListener('click', function(event) {
+    if (!confirmLogout()) {
+        event.preventDefault(); // Prevents the default action (logging out)
     }
+});
 </script>
 
 </body>

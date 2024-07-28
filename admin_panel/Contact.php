@@ -1,15 +1,20 @@
-
 <?php
-// Start session
 session_start();
 
-// Database connection parameters
-include 'Database.php';
+// Check if the user is logged in
+if (!isset($_SESSION['username'])) {
+    header('Location: index.html'); // Redirect to login page if not logged in
+    exit;
+}
 
-// Create connection
+// Database connection setup (replace with your actual database connection code)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "softkey";
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -27,7 +32,7 @@ $result = $conn->query($sql);
     <title>Admin Dashboard - Contact</title>
     
     <link href="admin_panel.css" rel="stylesheet">
-    <link rel = "stylesheet" href = "Contact.css">
+    <link rel="stylesheet" href="Contact.css">
   
 </head>
 <body>

@@ -8,7 +8,10 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Database configuration
-include 'Database.php';
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "Softkey";
 
 // Create a connection to the database
 $conn = new mysqli($servername, $username, $password, $dbname);

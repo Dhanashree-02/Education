@@ -1,36 +1,111 @@
-.main-content table {
+/* Contact.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Sidebar styles */
+.sidebar {
+    background-color: #3f4d67;
+    color: #fff;
+    padding: 20px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-bottom: 1px solid #a9b7d0;
+}
+
+.sidebar a:hover {
+    color: #39afd3;
+}
+
+/* Main content styles */
+.main-content {
+    flex-grow: 1;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin: 20px;
+}
+
+/* Table styles */
+table {
     border-collapse: collapse;
     width: 100%;
     margin: 20px 0;
+    overflow-x: auto; /* Enables horizontal scrolling on smaller screens */
+    display: block; /* Allows the table to scroll */
 }
-.main-content table, th, td {
+
+th, td {
     border: 1px solid #ddd;
     text-align: left;
     padding: 10px;
 }
-.main-content th {
+
+th {
     background-color: rgb(178, 170, 170); 
     font-weight: bold;
     color: #fff; 
 }
-.main-content tr {
+
+tr {
     transition: transform 0.5s ease;
     background-color: whitesmoke; 
-
 }
-.main-content tr:hover {
+
+tr:hover {
     background-color: #f9f9f9; /* Light grey background on hover */
     transform: scale(1.05);
 }
-.main-content td {
+
+td {
     vertical-align: top; /* Align content vertically */
     text-align: center;
 }
-.main-content td a {
-    color: #007bff; /* Blue color for links */
-    text-decoration: none; /* No underline for links */
-    transition: color 0.3s ease;
-}
-.main-content td a:hover {
-    color: #0056b3; /* Darker blue on hover */
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none; /* Hide sidebar on smaller screens */
+    }
+
+    .main-content {
+        margin: 10px; /* Adjust main content margin */
+    }
+
+    table {
+        display: block; /* Display the table as a block for scrolling */
+        overflow-x: auto; /* Allow horizontal scrolling */
+    }
+
+    th, td {
+        display: block; /* Display each cell as a block */
+        width: 100%; /* Make cells take full width */
+        box-sizing: border-box; /* Include padding and border in element's total width */
+    }
+
+    th {
+        position: sticky; /* Make header sticky */
+        top: 0; /* Position the header at the top */
+        z-index: 1; /* Ensure the header stays above the rows */
+    }
+
+    tr {
+        display: flex; /* Use flexbox for rows */
+        flex-direction: column; /* Stack cells vertically */
+        margin-bottom: 10px; /* Add space between rows */
+    }
 }
