@@ -4,29 +4,31 @@ body {
     display: flex;
     height: 100vh;
     margin: 0;
+    transition: background-color 0.5s ease;
 }
-
 .sidebar {
-    background-color: #3f4d67;
+    background-color:#3f4d67;
     color: #fff;
     padding: 20px;
     width: 200px;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.5s ease;
 }
-
 .sidebar a {
     color: #fff;
     text-decoration: none;
     padding: 10px 0;
     margin: 5px 0;
     border-bottom: 1px solid #a9b7d0;
-}
+    transition: transform 0.5s ease;
 
+}
 .sidebar a:hover {
     color: #39afd3;
-}
+    transform: scale(1.05);
 
+}
 .main-content {
     flex-grow: 1;
     background-color: #fff;
@@ -34,73 +36,18 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     margin: 20px;
-    display: flex;
-    flex-wrap: wrap; /* Allow cards to wrap */
-    justify-content: space-between; /* Space between cards */
-}
-
-/* Card Styles */
-.card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 20px;
-    margin: 10px;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column; /* Arrange content in a column */
-    flex: 1 1 calc(33.33% - 20px); /* Default width for larger screens */
-    max-width: calc(33.33% - 20px); /* Max width for larger screens */
-    text-align: center;
-    position: relative;
     transition: transform 0.5s ease;
-    border: 1px solid black;
 }
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card .view-button {
-    background-color: #007bff;
-    color: white;
+.logout-button {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: #fff;
     border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 3px;
     cursor: pointer;
-    text-decoration: none;
     transition: background-color 0.5s ease;
-    margin-top: auto; /* Push button to bottom */
 }
-
-.card .view-button:hover {
-    background-color: #0056b3;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 1024px) {
-    .card {
-        flex: 1 1 calc(50% - 20px); /* 2 cards per row for small desktops */
-        max-width: calc(50% - 20px); /* Max width for small desktops */
-    }
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100px; /* Reduce sidebar width on smaller devices */
-    }
-    .card {
-        flex: 1 1 calc(50% - 20px); /* 2 cards per row for tablets */
-        max-width: calc(50% - 20px); /* Max width for tablets */
-    }
-}
-
-@media (max-width: 480px) {
-    .sidebar {
-        width: 80px; /* Further reduce sidebar width on mobile */
-    }
-    .card {
-        flex: 1 1 calc(100% - 20px); /* 1 card per row for mobile devices */
-        max-width: calc(100% - 20px); /* Max width for mobile */
-    }
+.logout-button:hover {
+    background-color: #c82333;
 }
 

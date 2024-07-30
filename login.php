@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $error = 'Invalid username or password';
         // Redirect back to the login page with an error (you might want to implement a better error handling mechanism)
-        header('Location: index.html');
+        header('Location: index.php');
         exit;
     }
 } else {

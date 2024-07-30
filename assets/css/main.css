@@ -1,4 +1,8 @@
 
+/*--------------------------------------------------------------
+# Font & Color Variables
+# Help: https://bootstrapmade.com/color-system/
+--------------------------------------------------------------*/
 /* Fonts */
 :root {
   --default-font: "Open Sans",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -34,7 +38,7 @@
 }
 
 .dark-background {
-  --background-color: #a54c4c;
+  --background-color: #060606;
   --default-color: #ffffff;
   --heading-color: #ffffff;
   --surface-color: #252525;
@@ -856,15 +860,6 @@ section,
   text-transform: uppercase;
 }
 
-/* *--------------------------------------------------------------
-# Slider Section
---------------------------------------------------------------*/ */
-.Slider{
-  margin: 0%;
-  padding: 0%;
-  height: 50%;
-}
-
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -878,7 +873,7 @@ section,
   justify-content: center;
   color: var(--default-color);
 }
-/* 
+
 .hero img {
   position: absolute;
   inset: 0;
@@ -887,7 +882,7 @@ section,
   height: 100%;
   object-fit: cover;
   z-index: 1;
-} */
+}
 
 .hero:before {
   content: "";
@@ -898,7 +893,7 @@ section,
 }
 
 .hero .container {
-  position: absolute;
+  position: relative;
   z-index: 3;
 }
 

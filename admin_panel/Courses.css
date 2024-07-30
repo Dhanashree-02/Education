@@ -38,29 +38,3 @@
   color: #0056b3; /* Darker blue on hover */
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .courses-table {
-    display: block; /* Display the table as a block for scrolling */
-    overflow-x: auto; /* Allow horizontal scrolling */
-  }
-
-  .courses-table th, 
-  .courses-table td {
-    display: block; /* Display each cell as a block */
-    width: 100%; /* Make cells take full width */
-    box-sizing: border-box; /* Include padding and border in element's total width */
-  }
-
-  .courses-table tr {
-    display: flex; /* Use flexbox for rows */
-    flex-direction: column; /* Stack cells vertically */
-    margin-bottom: 10px; /* Add space between rows */
-  }
-
-  .courses-table th {
-    position: sticky; /* Make header sticky */
-    top: 0; /* Position the header at the top */
-    z-index: 1; /* Ensure the header stays above the rows */
-  }
-}

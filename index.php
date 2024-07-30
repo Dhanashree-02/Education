@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Softkey Education</title>
+  <title>Index - Mentor Bootstrap Template</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -27,14 +27,6 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- jQuery and Bootstrap JS -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </head>
 
@@ -43,17 +35,18 @@
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
+      <a href="index.php" class="logo d-flex align-items-center me-auto">
         <img src="assets/img/logo.png" alt="">
         <!-- <h1 class="sitename">SoftKey Education </h1> -->
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.html"class="active">Home<br></a></li>
+          <li><a href="index.php" class="active">Home<br></a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="universities.php">Universities</a></li>
-          <li><a href="courses.php">Courses</a></li>
+          <li><a href="courses.php">Cources</a></li>
+          
           <li><a href="contact.html">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -65,74 +58,55 @@
   </header>
 
   <main class="main">
-      <!-- Hero Section -->
-      <!-- <section id="hero" class="hero section dark-background">
 
-      <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
+    <?php
+// Start session
+session_start();
 
-      <div class="container">
-       
-        <h2 data-aos="fade-up" data-aos-delay="100"> Softkey Education Society,<br>
-        </h2>
-        <p data-aos="fade-up" data-aos-delay="200">We offer distance education programs.</p>
-        <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-          <a href="courses.php" class="btn-get-started">Get Started</a>
-        </div>
+// Database connection parameters
+include 'Database.php';
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch slider images
+$sql = "SELECT image FROM slider";
+$result = $conn->query($sql);
+$images = [];
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $images[] = $row["image"];
+    }
+}
+$conn->close();
+?>
+    <!-- Hero Section -->
+<section id="hero" class="hero section dark-background">
+  <?php if (!empty($images)): ?>
+      <?php foreach ($images as $image): ?>
+          <img src="assets/uploads/<?php echo htmlspecialchars($image); ?>" alt="Slider Image" data-aos="fade-in">
+      <?php endforeach; ?>
+  <?php else: ?>
+      <img src="assets/img/hero-bg.jpg" alt="Default Hero Background" data-aos="fade-in">
+  <?php endif; ?>
+
+  <div class="container">
+      <h2 data-aos="fade-up" data-aos-delay="100">Softkey Education Society,<br></h2>
+      <p data-aos="fade-up" data-aos-delay="200">We offer distance education programs.</p>
+      <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+          <a href="courses.html" class="btn-get-started">Get Started</a>
       </div>
+  </div>
+</section><!-- /Hero Section -->
 
-    </section>  -->
-    <!-- /Hero Section -->
-  
-     <!-- Slider Section -->
-       <section id="slider" class="slider section">
-      <?php
-        session_start();
-        include 'Database.php';
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        $sql = "SELECT image_path FROM slider ORDER BY position ASC";
-        $result = $conn->query($sql);
-        $images = [];
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $images[] = $row['image_path'];
-            }
-        } else {
-            echo "<p>No images found in the database.</p>";
-        }
-        $conn->close();
-      ?>
-      <div class="container">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <?php foreach ($images as $index => $image): ?>
-              <li data-target="#myCarousel" data-slide-to="<?php echo $index; ?>" class="<?php echo $index === 0 ? 'active' : ''; ?>"></li>
-            <?php endforeach; ?>
-          </ol>
-          <div class="carousel-inner">
-            <?php foreach ($images as $index => $image): ?>
-              <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-                <img src="<?php echo $image; ?>" alt="Slide <?php echo $index + 1; ?>" style="width:100%;">
-              </div>
-            <?php endforeach; ?>
-          </div>
-          <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </div>
-    </section>
-    <!-- /Slider Section -->
+<script src="path/to/your/js/scripts.js"></script>
 
-
-  <!-- About Section -->
+    <!-- About Section -->
     <section id="about" class="about section">
 
       <div class="container">
@@ -140,7 +114,7 @@
         <div class="row gy-4">
 
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/img/About_us.jpg" class="img-fluid" alt="" style="border: 2px solid #000;" onmouseover="this.style.border='2px solid green';" onmouseout="this.style.border='2px solid #000';">
+            <img src="assets/img/about.jpg" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
@@ -155,7 +129,7 @@
                Softkey is Educational in content, Philanthropical in spirit, Scientific in temper and humanitatian in outlook.
             </p>
            
-            <a href="about.html" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
           </div>
 
         </div>
@@ -210,19 +184,18 @@
 
       <div class="container">
 
-        <div class="row gy-4" >
+        <div class="row gy-4">
 
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100" >
-            <div class="why-box" >
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="why-box">
               <h3>Why Choose Us?</h3>
-              <p>
-                    <b>Use Testimonials:</b> Include testimonials from students and parents to build trust and credibility.<br>
-                    <b>Highlight Achievements:</b>Mention any awards or recognitions your institution has received.<br>
-                    <b>Visuals:</b> Use engaging visuals such as images and infographics to make the section more appealing.<br>
-                    <b>Clear Call-to-Action:</b> End with a clear call-to-action, encouraging visitors to enroll or contact you for more information.
+              <p><b>Use Testimonials:</b> Include testimonials from students and parents to build trust and credibility.<br>
+                  <b>Highlight Achievements:</b>Mention any awards or recognitions your institution has received.<br>
+                  <b>Visuals:</b> Use engaging visuals such as images and infographics to make the section more appealing.<br>
+                  <b>Clear Call-to-Action:</b> End with a clear call-to-action, encouraging visitors to enroll or contact you for more information.
               </p>
               <div class="text-center">
-                <a href="about.html" class="more-btn"><span>Learn More</span> <i class="bi bi-chevron-right"></i></a>
+                <a href="#" class="more-btn"><span>Learn More</span> <i class="bi bi-chevron-right"></i></a>
               </div>
             </div>
           </div><!-- End Why Box -->
@@ -231,17 +204,17 @@
             <div class="row gy-4" data-aos="fade-up" data-aos-delay="200">
 
               <div class="col-xl-4">
-                <div class="icon-box d-flex flex-column justify-content-center align-items-center" style="border-color: black;">
-                  <i class="bi bi-card-list"></i>
+                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                  <i class="bi bi-clipboard-data"></i>
                   <h4>Flexible Learning Options</h4>
                   <p>Online and Offline Modes</p>
-                 <p> We offer both online and offline learning options.</p>
+                 <p> We offer both online and offline learning options to accommodate different learning preferences.</p>
                 </div>
               </div><!-- End Icon Box -->
 
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="icon-box d-flex flex-column justify-content-center align-items-center" style="border-color: black;">
-                  <i class="bi bi-currency-rupee"></i>
+                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                  <i class="bi bi-gem"></i>
                   <h4>Affordable and Accessible</h4>
                   <p>Competitive Pricing</p>
                   <p>We provide high-quality education at affordable prices to make learning accessible to everyone.</p>
@@ -249,8 +222,8 @@
               </div><!-- End Icon Box -->
 
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
-                <div class="icon-box d-flex flex-column justify-content-center align-items-center" style="border-color: black;">
-                  <i class="bi bi-file-check"></i>
+                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                  <i class="bi bi-inboxes"></i>
                   <h4>Student-Centric Approach</h4>
                   <p>Supportive Community</p>
                   <p>We foster a supportive and inclusive community where every student is encouraged to thrive.</p>
@@ -274,91 +247,91 @@
         <p>Popular Courses</p>
       </div><!-- End Section Title -->
 
-      <div class="container" >
+      <div class="container">
 
         <div class="row gy-4">
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="features-item" style="border-color: black;  border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #ffbb2c;"></i>
-              <h3><a href="courses.php" class="stretched-link">POST GRADUATE COURSES</a></h3>
+              <h3><a href="" class="stretched-link">POST GRADUATE COURSES</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="features-item" style="border-color: black; border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #5578ff;"></i>
-              <h3><a href="courses.php" class="stretched-link">UNDER GRADUATE COURSES</a></h3>
+              <h3><a href="" class="stretched-link">UNDER GRADUATE COURSES</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="300">
-            <div class="features-item" style="border-color: black; border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #e80368;"></i>
-              <h3><a href="courses.php" class="stretched-link">DIPLOMA COURSES</a></h3>
+              <h3><a href="" class="stretched-link">DIPLOMA COURSES</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="400">
-            <div class="features-item" style="border-color: black; border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #e361ff;"></i>
-              <h3><a href="courses.php" class="stretched-link">DIPLOMA ENGINEERING</a></h3>
+              <h3><a href="" class="stretched-link">DIPLOMA ENGINEERING</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="500">
-            <div class="features-item" style="border-color: black; border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #47aeff;"></i>
-                <h3><a href="courses.php" class="stretched-link">MASTER COURSES</a></h3>
+              <h3><a href="" class="stretched-link">MASTER COURSES</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="600">
-            <div class="features-item" style="border-color: black; border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #ffa76e;"></i>
-                <h3><a href="courses.php" class="stretched-link">BACHELOR COURSES</a></h3>
+              <h3><a href="" class="stretched-link">BACHELOR COURSES</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="700">
-            <div class="features-item" style="border-color: black; border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #11dbcf;"></i>
-                <h3><a href="courses.php" class="stretched-link">CERTIFICATE COURSES</a></h3>
+              <h3><a href="" class="stretched-link">CERTIFICATE COURSES</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="800">
-            <div class="features-item" style="border-color: black; border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #4233ff;"></i>
-                <h3><a href="courses.php" class="stretched-link">P. G. DIPLOMA COURSES</a></h3>
+              <h3><a href="" class="stretched-link">P. G. DIPLOMA COURSES</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="900">
-            <div class="features-item" style="border-color: black; border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #b2904f;"></i>
-                <h3><a href="courses.php" class="stretched-link">BACHELOR OF TECHNOLOGY</a></h3>
+              <h3><a href="" class="stretched-link">BACHELOR OF TECHNOLOGY</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1000">
-            <div class="features-item" style="border-color: black; border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #b20969;"></i>
-                <h3><a href="courses.php" class="stretched-link">MASTER OF TECHNOLOGY</a></h3>
+              <h3><a href="" class="stretched-link">MASTER OF TECHNOLOGY</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1100">
-            <div class="features-item" style="border-color: black; border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #ff5828;"></i>
-                <h3><a href="courses.php" class="stretched-link">CERTIFICATE COURSES</a></h3>
+              <h3><a href="" class="stretched-link">CERTIFICATE COURSES</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1200">
-            <div class="features-item" style="border-color: black; border-radius: 10px;">
+            <div class="features-item">
               <i class="bi bi-mortarboard" style="color: #cc299b;"></i>
-                <h3><a href="courses.php" class="stretched-link">Flavor Nivelanda</a></h3>
+              <h3><a href="" class="stretched-link">Flavor Nivelanda</a></h3>
             </div>
           </div><!-- End Feature Item -->
 
@@ -382,46 +355,49 @@
         <div class="row">
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="course-item" style="border-color: black;">
-              <img src="assets/img/University1.jpg" class="img-fluid" alt="...">
+            <div class="course-item">
+              <img src="assets/img/course-1.jpg" class="img-fluid" alt="...">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <p class="category">https://arunodayauniversity.ac.in/</p>
                   <!-- <p class="price">$169</p> -->
                 </div>
 
-                <h3><a href="https://arunodayauniversity.ac.in/">Arunodaya University</a></h3>
-                
+                <h3><a href="course-details.html">Arunodaya University</a></h3>
+                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+             
               </div>
             </div>
           </div> <!-- End Course Item-->
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="course-item"style="border-color: black;">
-              <img src="assets/img/University2.jpg" class="img-fluid" alt="...">
+            <div class="course-item">
+              <img src="assets/img/course-2.jpg" class="img-fluid" alt="...">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <p class="category">https://ycmouoa.digitaluniversity.ac/</p>
                   <!-- <p class="price">$250</p> -->
                 </div>
 
-                <h3><a href="https://ycmouoa.digitaluniversity.ac/">Yashwanthrao Chavan</a></h3>
-                
+                <h3><a href="course-details.html">Yashwanthrao Chavan</a></h3>
+                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+               
               </div>
             </div>
           </div> <!-- End Course Item-->
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="course-item"style="border-color: black;">
-              <img src="assets/img/University1.jpg" class="img-fluid" alt="...">
+            <div class="course-item">
+              <img src="assets/img/course-3.jpg" class="img-fluid" alt="...">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <p class="category">https://singhaniauniversity.ac.in/</p>
                   <!-- <p class="price">$180</p> -->
                 </div>
 
-                <h3><a href="https://singhaniauniversity.ac.in/">Singhania University</a></h3>
-              
+                <h3><a href="course-details.html">Singhania University</a></h3>
+                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                
               </div>
             </div>
           </div> <!-- End Course Item-->
@@ -432,8 +408,6 @@
 
     </section><!-- /Courses Section -->
 
-   
-
   </main>
 
   <footer id="footer" class="footer position-relative light-background">
@@ -441,7 +415,7 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
+          <a href="index.php" class="logo d-flex align-items-center">
             <span class="sitename">SoftKey Education</span>
           </a>
           <div class="footer-contact pt-3">
@@ -520,9 +494,6 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-  
-  <!-- Bootstrap script -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
 

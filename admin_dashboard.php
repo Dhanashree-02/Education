@@ -15,8 +15,41 @@ if (!isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     
-    <link rel = "stylesheet" href = "admin_panel.css">
-   
+    <link rel = "stylesheet" href = "admin_panel/admin_panel.css">
+    <style>
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            background-color: #fff;
+            display: inline-block;
+            width: calc(33% - 20px);
+            text-align: center;
+            position: relative;
+            transition: transform 0.5s ease;
+            border: 1px solid black;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card .view-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.5s ease;
+        }
+        .card .view-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
@@ -32,7 +65,7 @@ if (!isset($_SESSION['username'])) {
 
 <div class="main-content">
     <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
-    <h3>This is your admin dashboard.</h3>
+    <p>This is your admin dashboard.</p>
     <div class="card">
         <h3>Universities</h3>
         <p>Manage universities details.</p>

@@ -75,37 +75,3 @@ td {
     vertical-align: top; /* Align content vertically */
     text-align: center;
 }
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .sidebar {
-        display: none; /* Hide sidebar on smaller screens */
-    }
-
-    .main-content {
-        margin: 10px; /* Adjust main content margin */
-    }
-
-    table {
-        display: block; /* Display the table as a block for scrolling */
-        overflow-x: auto; /* Allow horizontal scrolling */
-    }
-
-    th, td {
-        display: block; /* Display each cell as a block */
-        width: 100%; /* Make cells take full width */
-        box-sizing: border-box; /* Include padding and border in element's total width */
-    }
-
-    th {
-        position: sticky; /* Make header sticky */
-        top: 0; /* Position the header at the top */
-        z-index: 1; /* Ensure the header stays above the rows */
-    }
-
-    tr {
-        display: flex; /* Use flexbox for rows */
-        flex-direction: column; /* Stack cells vertically */
-        margin-bottom: 10px; /* Add space between rows */
-    }
-}

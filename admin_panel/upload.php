@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['uploadError'] = "Sorry, your file is too large.";
         header('Location: universities.php');
         exit;
-    }
+    }   
 
     // Allow certain file formats
     if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {

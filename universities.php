@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header('Location: index.html'); // Redirect to login page if not logged in
+    header('Location: index.php'); // Redirect to login page if not logged in
     exit;
 }
 ?>
@@ -31,12 +31,12 @@ if (!isset($_SESSION['username'])) {
 
 <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
-        <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <a href="index.php" class="logo d-flex align-items-center me-auto">
             <img src="assets/img/logo.png" alt="">
         </a>
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="universities.php" class="active">Universities</a></li>
                 <li><a href="courses.php">Courses</a></li>
@@ -53,7 +53,7 @@ if (!isset($_SESSION['username'])) {
         <nav class="breadcrumbs">
             <div class="container">
                 <ol>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li class="current">Universities</li>
                 </ol>
             </div>
@@ -120,7 +120,7 @@ if (!isset($_SESSION['username'])) {
     <div class="container footer-top">
         <div class="row gy-4">
             <div class="col-lg-4 col-md-6 footer-about">
-                <a href="index.html" class="logo d-flex align-items-center">
+                <a href="index.php" class="logo d-flex align-items-center">
                     <span class="sitename">SoftKey Education</span>
                 </a>
                 <div class="footer-contact pt-3">
