@@ -27,6 +27,7 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </head>
 
@@ -58,8 +59,7 @@
   </header>
 
   <main class="main">
-
-    <?php
+  <?php
 // Start session
 session_start();
 
@@ -494,6 +494,12 @@ $conn->close();
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Add the necessary scripts at the end of the body -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="path/to/your/js/scripts.js"></script>
 
 </body>
 
