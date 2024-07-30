@@ -66,7 +66,7 @@ $conn->close();
         echo '<div class="carousel-inner">';
         foreach ($images as $index => $image) {
             echo '<div class="carousel-item ' . ($index === 0 ? 'active' : '') . '">';
-            echo '<img src="../assets/uploads/' . htmlspecialchars($image) . '" class="d-block w-100" alt="Slider Image">';
+            echo '<img src="../assets/Slider/' . htmlspecialchars($image) . '" class="d-block w-100" alt="Slider Image">';
             echo '</div>';
         }
         echo '</div>';
@@ -87,6 +87,6 @@ $conn->close();
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

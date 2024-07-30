@@ -25,6 +25,13 @@ if (!isset($_SESSION['username'])) {
     <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
+    <style>
+        /* Added hover effects for course items */
+        .course-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 
 <body class="courses-page">
@@ -79,7 +86,7 @@ if (!isset($_SESSION['username'])) {
                 if (is_dir($uploadDir)) {
                     $files = array_diff(scandir($uploadDir), array('.', '..'));
                     foreach ($files as $file) {
-                        echo '<div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">';
+                        echo '<div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="zoom-in" data-aos-delay="100">';
                         echo '<div class="course-item" style="border-color: black;">';
                         echo '<img src="' . $uploadDir . htmlspecialchars($file) . '" class="img-fluid" alt="...">';
                         echo '<div class="course-content">';
@@ -176,7 +183,6 @@ if (!isset($_SESSION['username'])) {
         <p>© <span>Copyright</span> <strong class="px-1 sitename">SoftKey Education</strong>
             <span>All Rights Reserved</span></p>
         <div class="credits">
-            <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
         </div>
     </div>
 </footer>

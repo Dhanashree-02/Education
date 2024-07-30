@@ -29,6 +29,40 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+  <style>
+        .swiper-container {
+            width: 100%;
+            height: 400px;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 500px;
+            max-height: 300px;
+            object-fit: cover;
+        }
+    </style>
+
 </head>
 
 <body class="index-page">
@@ -59,6 +93,7 @@
   </header>
 
   <main class="main">
+
   <?php
 // Start session
 session_start();
@@ -85,26 +120,42 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 ?>
-    <!-- Hero Section -->
+<!-- Hero Section -->
 <section id="hero" class="hero section dark-background">
-  <?php if (!empty($images)): ?>
-      <?php foreach ($images as $image): ?>
-          <img src="assets/uploads/<?php echo htmlspecialchars($image); ?>" alt="Slider Image" data-aos="fade-in">
-      <?php endforeach; ?>
-  <?php else: ?>
-      <img src="assets/img/hero-bg.jpg" alt="Default Hero Background" data-aos="fade-in">
-  <?php endif; ?>
+    <?php if (!empty($images)): ?>
+        <?php foreach ($images as $image): ?>
+            <img src="assets/uploads/<?php echo htmlspecialchars($image); ?>" alt="Slider Image" data-aos="fade-in">
+        <?php endforeach; ?>
+    <?php else: ?>
+        <img src="assets/img/hero-bg.jpg" alt="Default Hero Background" data-aos="fade-in">
+    <?php endif; ?>
 
-  <div class="container">
-      <h2 data-aos="fade-up" data-aos-delay="100">Softkey Education Society,<br></h2>
-      <p data-aos="fade-up" data-aos-delay="200">We offer distance education programs.</p>
-      <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-          <a href="courses.html" class="btn-get-started">Get Started</a>
-      </div>
-  </div>
+    <div class="container">
+        <h2 data-aos="fade-up" data-aos-delay="100">Softkey Education Society,<br></h2>
+        <p data-aos="fade-up" data-aos-delay="200">We offer distance education programs.</p>
+        <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+            <a href="courses.html" class="btn-get-started">Get Started</a>
+        </div>
+    </div>
 </section><!-- /Hero Section -->
 
-<script src="path/to/your/js/scripts.js"></script>
+  <section id="swiper" class="swiper section">
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="assets/img/about.jpg" alt="Image 1"></div>
+            <div class="swiper-slide"><img src="assets/img/about_us.jpg" alt="Image 2"></div>
+            <div class="swiper-slide"><img src="assets/img/about-2.jpg" alt="Image 3"></div>
+            <div class="swiper-slide"><img src="assets/img/course-1.jpg" alt="Image 4"></div>
+            <div class="swiper-slide"><img src="assets/img/course-2.jpg" alt="Image 5"></div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+  </section>
 
     <!-- About Section -->
     <section id="about" class="about section">
@@ -208,7 +259,7 @@ $conn->close();
                   <i class="bi bi-clipboard-data"></i>
                   <h4>Flexible Learning Options</h4>
                   <p>Online and Offline Modes</p>
-                 <p> We offer both online and offline learning options to accommodate different learning preferences.</p>
+                 <p> We offer both online and offline learning.</p>
                 </div>
               </div><!-- End Icon Box -->
 
@@ -500,6 +551,25 @@ $conn->close();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="path/to/your/js/scripts.js"></script>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+
 
 </body>
 

@@ -19,7 +19,7 @@ if (isset($_POST["submit"])) {
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-    // Check if image file is an actual image or fake image
+    // Check if image file is a actual image or fake image
     $check = getimagesize($_FILES["sliderImage"]["tmp_name"]);
     if ($check !== false) {
         $uploadOk = 1;
@@ -35,7 +35,7 @@ if (isset($_POST["submit"])) {
     }
 
     // Check file size
-    if ($_FILES["sliderImage"]["size"] > 500000) { // 500KB limit
+    if ($_FILES["sliderImage"]["size"] > 500000) {
         $_SESSION['upload_message'] = "Sorry, your file is too large.";
         $uploadOk = 0;
     }
