@@ -59,6 +59,7 @@ if (!isset($_SESSION['username'])) {
     <a href="admin_panel/courses.php">Courses</a>
     <a href="admin_panel/Img.php">Image</a>
     <a href="admin_panel/Contact.php">Contact</a>
+    <a href="admin_panel/swiper.php">Swiper</a>
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 
 </div>
