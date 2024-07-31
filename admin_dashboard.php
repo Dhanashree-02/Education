@@ -19,9 +19,9 @@ if (!isset($_SESSION['username'])) {
     <style>
         .card {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-            padding: 20px;
-            margin: 10px;
+            border-radius: 15px;
+            padding: 5px;
+            margin: 5px;
             background-color: #fff;
             display: inline-block;
             width: calc(33% - 20px);
@@ -40,8 +40,8 @@ if (!isset($_SESSION['username'])) {
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 10px 10px;
+            border-radius: 15px;
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.5s ease;
@@ -57,7 +57,7 @@ if (!isset($_SESSION['username'])) {
 <a href="admin_dashboard.php"><h2>Admin Dashboard</h2></a>
     <a href="admin_panel/universities.php">Universities</a>
     <a href="admin_panel/courses.php">Courses</a>
-    <a href="admin_panel/Slider.php">Slider</a>
+    <a href="admin_panel/Img.php">Image</a>
     <a href="admin_panel/Contact.php">Contact</a>
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 
@@ -77,14 +77,19 @@ if (!isset($_SESSION['username'])) {
         <a href="admin_panel/courses.php" class="view-button">View</a>
     </div>
     <div class="card">
-        <h3>Slider</h3>
-        <p>Manage the slider images.</p>
-        <a href="admin_panel/Slider.php" class="view-button">View</a>
+        <h3>Image</h3>
+        <p>Manage the Image images.</p>
+        <a href="admin_panel/Img.php" class="view-button">View</a>
     </div>
     <div class="card">
         <h3>Contact</h3>
         <p>Manage contact information.</p>
         <a href="admin_panel/Contact.php" class="view-button">View</a>
+    </div>
+    <div class="card">
+        <h3>Swiper</h3>
+        <p>Manage swiper information.</p>
+        <a href="admin_panel/Swiper.php" class="view-button">View</a>
     </div>
 </div>
 

@@ -71,6 +71,6 @@ if (isset($_POST["submit"])) {
 $conn->close();
 
 // Redirect back to the slider page
-header("Location: Slider.php");
+header("Location: Img.php");
 exit();
 ?>

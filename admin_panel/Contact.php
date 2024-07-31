@@ -41,8 +41,9 @@ $result = $conn->query($sql);
 <a href="../admin_dashboard.php""><h2>Admin Dashboard</h2></a>
     <a href="universities.php">Universities</a>
     <a href="courses.php">Courses</a>
-    <a href="Slider.php">Slider</a>
+    <a href="Img.php">Image</a>
     <a href="Contact.php">Contact</a>
+    <a href="swiper.php">Swiper</a>
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 
 </div>

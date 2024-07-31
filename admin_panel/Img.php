@@ -29,7 +29,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Slider</title>  
+    <title>Admin Dashboard - Image</title>  
     <link rel="stylesheet" href="admin_panel.css">
 </head>
 <body>
@@ -38,14 +38,15 @@ $conn->close();
     <a href="../admin_dashboard.php"><h2>Admin Dashboard</h2></a>
     <a href="universities.php">Universities</a>
     <a href="courses.php">Courses</a>
-    <a href="Slider.php">Slider</a>
+    <a href="Img.php">Image</a>
     <a href="Contact.php">Contact</a>
+    <a href="swiper.php">Swiper</a>
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 </div>
 
 <div class="main-content">
     <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
-    <h3>Slider</h3>
+    <h3>Image</h3>
 
     <form action="upload_slider_image.php" method="post" enctype="multipart/form-data">
         <label for="sliderImage">Select image to upload:</label>
