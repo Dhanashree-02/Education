@@ -12,36 +12,35 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle the image upload
-if (isset($_POST["submit"])) {
-    $target_dir = "../assets/uploads/";
-    $target_file = $target_dir . basename($_FILES["sliderImage"]["name"]);
+// Check if the form was submitted
+if (isset($_POST['submit'])) {
+    // Handle file upload
+    $targetDir = '../assets/Slider/'; // Target directory
+    $targetFile = $targetDir . basename($_FILES['sliderImage']['name']);
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
     $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
     // Check if image file is a actual image or fake image
-    $check = getimagesize($_FILES["sliderImage"]["tmp_name"]);
-    if ($check !== false) {
-        $uploadOk = 1;
-    } else {
+    $check = getimagesize($_FILES['sliderImage']['tmp_name']);
+    if ($check === false) {
         $_SESSION['upload_message'] = "File is not an image.";
         $uploadOk = 0;
     }
 
     // Check if file already exists
-    if (file_exists($target_file)) {
+    if (file_exists($targetFile)) {
         $_SESSION['upload_message'] = "Sorry, file already exists.";
         $uploadOk = 0;
     }
 
-    // Check file size
-    if ($_FILES["sliderImage"]["size"] > 500000) {
+    // Limit file size (e.g., 5MB)
+    if ($_FILES['sliderImage']['size'] > 5000000) {
         $_SESSION['upload_message'] = "Sorry, your file is too large.";
         $uploadOk = 0;
     }
 
     // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+    if (!in_array($imageFileType, ['jpg', 'png', 'jpeg', 'gif'])) {
         $_SESSION['upload_message'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
         $uploadOk = 0;
     }
@@ -49,17 +48,15 @@ if (isset($_POST["submit"])) {
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
         $_SESSION['upload_message'] = "Sorry, your file was not uploaded.";
-    // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($_FILES["sliderImage"]["tmp_name"], $target_file)) {
-            // Insert image info into the database
-            $imageName = basename($_FILES["sliderImage"]["name"]);
-            $sql = "INSERT INTO slider (image) VALUES ('$imageName')";
-
+        // Try to upload file
+        if (move_uploaded_file($_FILES['sliderImage']['tmp_name'], $targetFile)) {
+            // Insert file name into the database
+            $sql = "INSERT INTO slider (image) VALUES ('" . $conn->real_escape_string(basename($_FILES['sliderImage']['name'])) . "')";
             if ($conn->query($sql) === TRUE) {
-                $_SESSION['upload_message'] = "The file ". htmlspecialchars($imageName). " has been uploaded.";
+                $_SESSION['upload_message'] = "The file " . basename($_FILES['sliderImage']['name']) . " has been uploaded.";
             } else {
-                $_SESSION['upload_message'] = "Error: " . $sql . "<br>" . $conn->error;
+                $_SESSION['upload_message'] = "Error uploading file to database: " . $conn->error;
             }
         } else {
             $_SESSION['upload_message'] = "Sorry, there was an error uploading your file.";
@@ -67,10 +64,10 @@ if (isset($_POST["submit"])) {
     }
 }
 
-// Close the database connection
+// Close the connection
 $conn->close();
 
-// Redirect back to the slider page
+// Redirect back to the image upload page
 header("Location: Img.php");
 exit();
 ?>

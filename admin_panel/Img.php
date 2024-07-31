@@ -31,6 +31,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Image</title>  
     <link rel="stylesheet" href="admin_panel.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -67,11 +68,18 @@ $conn->close();
         echo '<div class="carousel-inner">';
         foreach ($images as $index => $image) {
             echo '<div class="carousel-item ' . ($index === 0 ? 'active' : '') . '">';
-            echo '<img src="../assets/Slider/' . htmlspecialchars($image) . '" class="d-block" style="width: 300px; height: auto;" alt="Slider Image">';
+            echo '<img src="../assets/Slider/' . htmlspecialchars($image) . '" class="d-block w-100" style="max-width: 300px; height: auto;" alt="Slider Image">';
             echo '</div>';
         }
         echo '</div>';
-        
+        echo '<a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">';
+        echo '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+        echo '<span class="sr-only">Previous</span>';
+        echo '</a>';
+        echo '<a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">';
+        echo '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+        echo '<span class="sr-only">Next</span>';
+        echo '</a>';
         echo '</div>';
     } else {
         echo "No images uploaded yet."; 
@@ -81,6 +89,6 @@ $conn->close();
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
