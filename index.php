@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Mentor Bootstrap Template</title>
+  <title>Index - SoftKey Education</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,8 +26,6 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -94,41 +92,11 @@
 
   <main class="main">
 
-  <?php
-// Start session
-session_start();
-
-// Database connection parameters
-include 'Database.php';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Fetch slider images
-$sql = "SELECT image FROM slider";
-$result = $conn->query($sql);
-$images = [];
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $images[] = $row["image"];
-    }
-}
-$conn->close();
-?>
+  
 <!-- Hero Section -->
 <section id="hero" class="hero section dark-background">
-    <?php if (!empty($images)): ?>
-        <?php foreach ($images as $image): ?>
-            <img src="assets/uploads/<?php echo htmlspecialchars($image); ?>" alt="Slider Image" data-aos="fade-in">
-        <?php endforeach; ?>
-    <?php else: ?>
+    
         <img src="assets/img/hero-bg.jpg" alt="Default Hero Background" data-aos="fade-in">
-    <?php endif; ?>
 
     <div class="container">
         <h2 data-aos="fade-up" data-aos-delay="100">Softkey Education Society,<br></h2>
@@ -407,7 +375,7 @@ $conn->close();
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="course-item">
-              <img src="assets/img/course-1.jpg" class="img-fluid" alt="...">
+              <img src="assets/img/University1.jpg" class="img-fluid" alt="...">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <p class="category">https://arunodayauniversity.ac.in/</p>
@@ -415,7 +383,6 @@ $conn->close();
                 </div>
 
                 <h3><a href="course-details.html">Arunodaya University</a></h3>
-                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
              
               </div>
             </div>
@@ -423,7 +390,7 @@ $conn->close();
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
             <div class="course-item">
-              <img src="assets/img/course-2.jpg" class="img-fluid" alt="...">
+              <img src="assets/img/University2.jpg" class="img-fluid" alt="...">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <p class="category">https://ycmouoa.digitaluniversity.ac/</p>
@@ -431,7 +398,6 @@ $conn->close();
                 </div>
 
                 <h3><a href="course-details.html">Yashwanthrao Chavan</a></h3>
-                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
                
               </div>
             </div>
@@ -439,7 +405,7 @@ $conn->close();
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
             <div class="course-item">
-              <img src="assets/img/course-3.jpg" class="img-fluid" alt="...">
+              <img src="assets/img/University1.jpg" class="img-fluid" alt="...">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <p class="category">https://singhaniauniversity.ac.in/</p>
@@ -447,7 +413,6 @@ $conn->close();
                 </div>
 
                 <h3><a href="course-details.html">Singhania University</a></h3>
-                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
                 
               </div>
             </div>

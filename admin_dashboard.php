@@ -57,9 +57,7 @@ if (!isset($_SESSION['username'])) {
 <a href="admin_dashboard.php"><h2>Admin Dashboard</h2></a>
     <a href="admin_panel/universities.php">Universities</a>
     <a href="admin_panel/courses.php">Courses</a>
-    <a href="admin_panel/Img.php">Image</a>
     <a href="admin_panel/Contact.php">Contact</a>
-    <a href="admin_panel/swiper.php">Swiper</a>
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 
 </div>
@@ -77,21 +75,13 @@ if (!isset($_SESSION['username'])) {
         <p>Manage courses details.</p>
         <a href="admin_panel/courses.php" class="view-button">View</a>
     </div>
-    <div class="card">
-        <h3>Image</h3>
-        <p>Manage the Image images.</p>
-        <a href="admin_panel/Img.php" class="view-button">View</a>
-    </div>
+
     <div class="card">
         <h3>Contact</h3>
         <p>Manage contact information.</p>
         <a href="admin_panel/Contact.php" class="view-button">View</a>
     </div>
-    <div class="card">
-        <h3>Swiper</h3>
-        <p>Manage swiper information.</p>
-        <a href="admin_panel/Swiper.php" class="view-button">View</a>
-    </div>
+
 </div>
 
 <script>
