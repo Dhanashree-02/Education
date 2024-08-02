@@ -1,4 +1,4 @@
-.body {
+body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     display: flex;
@@ -6,15 +6,18 @@
     margin: 0;
     transition: background-color 0.5s ease;
 }
+
 .sidebar {
-    background-color:#3f4d67;
+    background-color: #3f4d67;
     color: #fff;
     padding: 20px;
-    width: 200px;
+    width: 100%;
+    max-width: 200px; /* Changed from fixed width to max-width for responsiveness */
     display: flex;
     flex-direction: column;
     transition: background-color 0.5s ease;
 }
+
 .sidebar a {
     color: #fff;
     text-decoration: none;
@@ -22,13 +25,13 @@
     margin: 5px 0;
     border-bottom: 1px solid #a9b7d0;
     transition: transform 0.5s ease;
-
 }
+
 .sidebar a:hover {
     color: #39afd3;
     transform: scale(1.05);
-
 }
+
 .main-content {
     flex-grow: 1;
     background-color: #fff;
@@ -37,7 +40,10 @@
     border-radius: 5px;
     margin: 20px;
     transition: transform 0.5s ease;
+    display: flex;
+    flex-direction: column; /* Changed from flex-wrap: wrap to flex-direction: column to stack cards below welcome message */
 }
+
 .logout-button {
     padding: 10px 20px;
     background-color: #dc3545;
@@ -47,7 +53,66 @@
     cursor: pointer;
     transition: background-color 0.5s ease;
 }
+
 .logout-button:hover {
     background-color: #c82333;
 }
-  
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 1px;
+    margin: 10px 0; /* Changed from margin: 10px to margin: 10px 0 to stack cards vertically */
+    background-color: #fff;
+    display: inline-block;
+    width: calc(100% - 40px); /* Changed from fixed width to calc for responsiveness */
+    max-width: 30%; /* Added max-width for responsiveness */
+    text-align: center;
+    position: relative;
+    transition: transform 0.5s ease;
+    border: 1px solid black;
+}
+
+/* Added media query for responsiveness */
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card .view-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.5s ease;
+}
+
+.card .view-button:hover {
+    background-color: #0056b3;
+}
+
+/* Added media query for card content responsiveness */
+@media (max-width: 768px) {
+    .card h3 {
+        font-size: 1.5em; /* Adjusted font size for smaller screens */
+    }
+    .card p {
+        font-size: 1.2em; /* Adjusted font size for smaller screens */
+    }
+    .card .view-button {
+        padding: 8px 8px; /* Adjusted padding for smaller screens */
+        font-size: 1.2em; /* Adjusted font size for smaller screens */
+    }
+}
