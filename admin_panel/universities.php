@@ -32,6 +32,8 @@ $images = array_filter($images, function($file) use ($uploadsDir) {
     <a href="universities.php">Universities</a>
     <a href="courses.php">Courses</a>
     <a href="Contact.php">Contact</a>
+    <a href="Bg_Img.php">Bg_Img</a>
+    <a href="Slider.php">Slider</a>
     <a href="logout.php" onclick="return confirmLogout()">Logout</a>
 </div>
 

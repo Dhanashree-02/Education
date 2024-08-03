@@ -19,17 +19,15 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query to fetch contact information from database
-$sql = "SELECT * FROM contacts";
-$result = $conn->query($sql);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Contact</title>
+    <title>Admin Dashboard </title>
     
     <link href="admin_panel.css" rel="stylesheet">
     <link rel="stylesheet" href="Contact.css">
@@ -50,38 +48,8 @@ $result = $conn->query($sql);
 
 <div class="main-content">
 <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
-    <h3>Contact</h3>
+    <h3>Slider</h3>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Subject</th>
-                <th>Message</th>
-                <th>Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['name'] . "</td>";
-                    echo "<td>" . $row['email'] . "</td>";
-                    echo "<td>" . $row['subject'] . "</td>";
-                    echo "<td>" . $row['message'] . "</td>";
-                    echo "<td>" . $row['created_at'] . "</td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='6'>No contacts found</td></tr>";
-            }
-            ?>
-        </tbody>
-    </table>
 </div>
 
 <script>

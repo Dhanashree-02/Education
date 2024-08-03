@@ -1,15 +1,25 @@
+
 <?php
-// db_connect.php
-$servername = "localhost"; // Update with your server details
-$username = "root"; // Update with your MySQL username
-$password = ""; // Update with your MySQL password
-$dbname = "SoftKey"; // Update with your database name
+class Database {
+    private $host = "localhost";
+    private $db_name = "SoftKey";
+    private $username = "root";
+    private $password = "";
+    public $conn;
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+    public function getConnection() {
+        $this->conn = null;
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+        try {
+            $this->conn = new mysqli($this->host, $this->username, $this->password, $this->db_name);
+            if ($this->conn->connect_error) {
+                die("Connection failed: " . $this->conn->connect_error);
+            }
+        } catch (Exception $e) {
+            echo "Connection error: " . $e->getMessage();
+        }
+
+        return $this->conn;
+    }
 }
 ?>
