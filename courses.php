@@ -3,8 +3,11 @@
 session_start();
 
 // Database connection parameters
-include 'Database.php';
-
+// Database connection setup (replace with your actual database connection code)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "softkey";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 

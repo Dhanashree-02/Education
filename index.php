@@ -128,9 +128,9 @@ if ($result && $result->num_rows > 0) {
     </div>
 </section><!-- /Hero Section -->
 
-
+       <!-- /Swiper -->
     <section id="swiper" class="swiper section">
-      <!-- Swiper -->
+     
       <div class="swiper-container">
           <div class="swiper-wrapper">
               <div class="swiper-slide"><img src="assets/img/about.jpg" alt="Image 1"></div>
@@ -146,12 +146,11 @@ if ($result && $result->num_rows > 0) {
           <div class="swiper-button-prev"></div>
       </div>
     </section>
+     <!-- Swiper -->
 
       <!-- About Section -->
       <section id="about" class="about section">
-
         <div class="container">
-
           <div class="row gy-4">
 
             <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
