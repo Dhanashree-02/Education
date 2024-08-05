@@ -128,25 +128,48 @@ if ($result && $result->num_rows > 0) {
     </div>
 </section><!-- /Hero Section -->
 
-       <!-- /Swiper -->
-    <section id="swiper" class="swiper section">
-     
-      <div class="swiper-container">
-          <div class="swiper-wrapper">
-              <div class="swiper-slide"><img src="assets/img/about.jpg" alt="Image 1"></div>
-              <div class="swiper-slide"><img src="assets/img/about_us.jpg" alt="Image 2"></div>
-              <div class="swiper-slide"><img src="assets/img/about-2.jpg" alt="Image 3"></div>
-              <div class="swiper-slide"><img src="assets/img/course-1.jpg" alt="Image 4"></div>
-              <div class="swiper-slide"><img src="assets/img/course-2.jpg" alt="Image 5"></div>
-          </div>
-          <!-- Add Pagination -->
-          <div class="swiper-pagination"></div>
-          <!-- Add Navigation -->
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-      </div>
-    </section>
-     <!-- Swiper -->
+
+<!-- Swiper -->
+<section id="swiper" class="swiper section">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <?php
+            $directory = "admin_panel/assets/slider/";
+            $images = glob($directory . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
+
+            if (count($images) > 0) {
+                foreach ($images as $image) {
+                    echo '<div class="swiper-slide"><img src="'. htmlspecialchars($image) .'" alt="Slider Image"></div>';
+                }
+            } else {
+                echo "No images found in the slider directory.";
+            }
+            ?>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</section>
+<!-- /Swiper -->
+
+<script src="path/to/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
+<!-- /Swiper -->
+
 
       <!-- About Section -->
       <section id="about" class="about section">

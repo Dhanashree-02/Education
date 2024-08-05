@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["slider_image"])) {
-    $target_dir = "Slider/";
+    $target_dir = "assets/slider/";
     $target_file = $target_dir . basename($_FILES["slider_image"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
