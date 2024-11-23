@@ -1,0 +1,231 @@
+/* General Header Styling */
+.header {
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+    z-index: 1000;
+  }
+  
+  .container-xl {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Logo */
+  .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .logo-img {
+    max-height: 40px;
+    margin-right: 10px;
+  }
+  
+  /* Navigation Menu */
+  .navmenu {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-list {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-list li {
+    position: relative;
+  }
+  
+  .nav-list li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-list li a:hover, .nav-list li a.active {
+    color: #007bff;
+  }
+  
+  .nav-list .dropdown-menu {
+    display: none;
+    position: absolute;
+    background: #fff;
+    list-style: none;
+    top: 100%;
+    left: 0;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+  .nav-list .dropdown-menu li {
+    padding: 5px 20px;
+  }
+  
+  .nav-list .dropdown-menu li a {
+    color: #333;
+    font-size: 14px;
+  }
+  
+  .nav-list .dropdown-menu li a:hover {
+    color: #007bff;
+  }
+  
+  /* Show Dropdown on Hover */
+  .nav-list .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+  /* Mobile Navigation Toggle */
+  .mobile-nav-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .btn-getstarted {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .btn-getstarted:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .navmenu {
+      display: none;
+    }
+  
+    .mobile-nav-toggle {
+      display: block;
+    }
+  
+    .navmenu.active {
+      display: block;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: #fff;
+      width: 100%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+    }
+  
+    .nav-list {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .btn-getstarted {
+      margin-top: 10px;
+    }
+  }
+  
+
+  .footer {
+    background-color: #f8f9fa;
+    color: #343a40;
+  }
+  
+  .footer a {
+    color: #343a40;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    color: #007bff;
+  }
+  
+  .footer .social-links a {
+    font-size: 20px;
+    color: #343a40;
+  }
+  
+  .footer .social-links a:hover {
+    color: #007bff;
+  }
+  
+  .universities-section {
+    background-color: #f9f9f9;
+    padding: 50px 0;
+  }
+  
+  .scrollable-section {
+    overflow-y: auto;
+    max-height: calc(100vh - 100px); /* Adjust as needed */
+    padding-right: 15px;
+  }
+  
+  .scrollable-section img {
+    border-radius: 5px;
+  }
+  
+  .scrollable-section .university-item {
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fixed-section .sticky-top {
+    position: sticky;
+    top: 20px;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  .hero {
+    background: linear-gradient(to right, rgba(0, 123, 255, 0.8), rgba(0, 123, 255, 0.6)), url('hero-bg.jpg') center/cover;
+    padding: 100px 0;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .hero-content h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+  }
+  
+  .hero-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .hero-content .btn-getstarted {
+    background-color: #fff;
+    color: #007bff;
+    padding: 10px 25px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .hero-content .btn-getstarted:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
