@@ -121,6 +121,36 @@ if (!isset($_SESSION['username'])) {
             </script>
         </div>
     </section>
+
+
+    <section class="projects-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- First Section: Project Category 1 -->
+            <div class="col-lg-6 mb-4">
+                <div class="project-category">
+                    <h3>Project Category 1</h3>
+                    <p>Description or brief about this project category.</p>
+                    <a href="#" class="btn btn-primary">Explore More</a>
+                    <!-- Add images, info, or whatever is needed here -->
+                    <img src="path/to/your/image1.jpg" alt="Project 1" class="img-fluid">
+                </div>
+            </div>
+
+            <!-- Second Section: Project Category 2 -->
+            <div class="col-lg-6 mb-4">
+                <div class="project-category">
+                    <h3>Project Category 2</h3>
+                    <p>Description or brief about this project category.</p>
+                    <a href="#" class="btn btn-primary">Explore More</a>
+                    <!-- Add images, info, or whatever is needed here -->
+                    <img src="path/to/your/image2.jpg" alt="Project 2" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 </main>
 
 <footer id="footer" class="footer position-relative light-background">

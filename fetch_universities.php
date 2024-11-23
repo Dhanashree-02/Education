@@ -18,51 +18,39 @@ $sql = "SELECT name, website, image FROM universities";
 $result = $conn->query($sql);
 ?>
 
-<div class="col-lg-8 scrollable-section" style="overflow-y: auto; max-height: 100vh;">
-  <div class="section-title mb-4" data-aos="fade-up">
-    <h2>Universities</h2>
-    <p>Popular Universities</p>
-  </div>
+<section id="universities" class="universities section">
+    <div class="container">
+        <div class="row">
+            <?php
+            // Check if the query returned any results
+            if ($result->num_rows > 0) {
+                // Loop through all the rows in the result
+                while ($row = $result->fetch_assoc()) {
+                    $universityName = $row['name'];
+                    $universityWebsite = $row['website'];
+                    $universityImage = $row['image'];
 
-  <?php
-  // Check if there are universities in the database
-  if ($result->num_rows > 0) {
-      // Loop through each university
-      while ($row = $result->fetch_assoc()) {
-          // Display each university's card and information dynamically
-          ?>
-          <div class="row mb-4" data-aos="zoom-in" data-aos-delay="100">
-            <div class="col-md-6">
-              <div class="card h-100">
-                <img src="assets/img/<?php echo $row['image']; ?>" class="card-img-top" alt="<?php echo $row['name']; ?>">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="<?php echo $row['website']; ?>" target="_blank"><?php echo $row['name']; ?></a></h5>
-                  <p class="card-text">Explore more about <?php echo $row['name']; ?> and its programs.</p>
-                  <a href="<?php echo $row['website']; ?>" target="_blank" class="btn btn-primary w-100">View Details</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="university-info">
-                <h5>About <?php echo $row['name']; ?></h5>
-                <p>Learn more about <?php echo $row['name']; ?> and its educational programs. Discover the programs, opportunities, and facilities available to students.</p>
-                <ul>
-                  <li>Programs Offered: Engineering, Arts, Science, Management</li>
-                  <li>Location: City, State</li>
-                  <li>Accreditation: NAAC A+</li>
-                  <li>Contact: +1234567890</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <?php
-      }
-  } else {
-      echo "<p>No universities found.</p>";
-  }
-  ?>
-
-</div>
+                    // Output the university data in HTML
+                    echo '<div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">';
+                    echo '<div class="course-item" style="border-color: black;">';
+                    echo '<img src="' . $universityImage . '" class="img-fluid" alt="' . $universityName . '">';
+                    echo '<div class="course-content">';
+                    echo '<div class="d-flex justify-content-between align-items-center mb-3">';
+                    echo '<p class="category">University</p>';
+                    echo '</div>';
+                    echo '<h3><a href="' . $universityWebsite . '" target="_blank">' . $universityName . '</a></h3>';
+                    echo '<p>' . $row['description'] . '</p>'; // Optionally, you can add a description if available
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+            } else {
+                echo '<p>No universities found.</p>';
+            }
+            ?>
+        </div>
+    </div>
+</section>
 
 <?php
 // Close the database connection

@@ -45,7 +45,7 @@
     <nav id="navmenu" class="navmenu">
       <ul class="nav-list d-flex align-items-center">
         <li><a href="index.php" class="active">Home</a></li>
-        <li><a href="index.php">About</a></li>
+        <li><a href="universities.php">About</a></li>
         <li><a href="index.php">
         Schedule Site Visit</a></li>
 
@@ -105,6 +105,35 @@
               </div>
           </div>
       </section><!-- /Hero Section -->
+
+
+
+      <section class="projects-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- First Section: Project Category 1 -->
+            <div class="col-lg-6 mb-4">
+                <div class="project-category">
+                    <h3>Project Category 1</h3>
+                    <p>Description or brief about this project category.</p>
+                    <a href="#" class="btn btn-primary">Explore More</a>
+                    <img src="path/to/your/image1.jpg" alt="Project 1" class="img-fluid">
+                </div>
+            </div>
+
+            <!-- Second Section: Project Category 2 -->
+            <div class="col-lg-6 mb-4">
+                <div class="project-category">
+                    <h3>Project Category 2</h3>
+                    <p>Description or brief about this project category.</p>
+                    <a href="#" class="btn btn-primary">Explore More</a>
+                    <img src="path/to/your/image2.jpg" alt="Project 2" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
               
         <section id="universities" class="universities-section section">
@@ -229,7 +258,8 @@
       </div>
     </div>
   </div>
-</section>            
+</section>
+            
       </div>
     </div>
   </section>
